@@ -1,0 +1,21 @@
+.ideaformCont {
+padding:20px;
+}
+.description{
+    height:150px;
+}
+:host {
+    width: 100%;
+    @media (min-width: 992px) {
+      .ideaform {
+        width: 100%;
+        max-width: 450px;
+
+  
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+  

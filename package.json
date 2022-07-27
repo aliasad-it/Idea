@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "http": "^0.0.1-security",
+    "mssql": "^8.1.2",
+    "path": "^0.12.7",
+    "request": "^2.88.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "init",
+  "description": "- The current package includes the Angular version with Demo 1 only and other demos can be downloaded online from [Metronic Downloads](//devs.keenthemes.com/metronic)",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}

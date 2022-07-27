@@ -1,0 +1,14 @@
+<div class="row g-5 g-xl-8">
+  <div *ngFor="let dep of departments" class="col-xl-3">
+    <app-stats-widget5 (click)="ideaForm(dep)"
+      svgIcon={{dep.svgIcon}}
+      class={{dep.class}}
+      color={{dep.color}}
+      iconColor={{dep.iconColor}}
+      title={{dep.title}}
+      description={{dep.description}}
+    ></app-stats-widget5>
+  </div>
+
+</div>
+
