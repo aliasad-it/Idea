@@ -4,6 +4,7 @@ import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
+import { AuthenticationService } from 'src/app/services/authentication.service'; 
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -32,6 +33,7 @@ export class AuthService implements OnDestroy {
   }
 
   constructor(
+    private authenticationService: AuthenticationService,
     private authHttpService: AuthHTTPService,
     private router: Router
   ) {
@@ -45,9 +47,20 @@ export class AuthService implements OnDestroy {
 
   // public methods
   login(email: string, password: string): Observable<UserType> {
+    const notFoundError = new Error('Not Found');
     this.isLoadingSubject.next(true);
-    return this.authHttpService.login(email, password).pipe(
-      map((auth: AuthModel) => {
+    // return this.authHttpService.login(email, password).pipe(
+    return this.authenticationService.login(email, password).pipe(
+      map((user: UserModel) => {
+        console.log('user data from node', user)
+        if (!user) {
+          return notFoundError;
+        }
+
+        const auth = new AuthModel();
+        auth.authToken = user.authToken;
+        auth.refreshToken = user.refreshToken;
+        auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);       
         const result = this.setAuthFromLocalStorage(auth);
         return result;
       }),
@@ -59,6 +72,22 @@ export class AuthService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+  // login(email: string, password: string): Observable<UserType> {
+  //   this.isLoadingSubject.next(true);
+  //   // return this.authHttpService.login(email, password).pipe(
+  //   return this.authenticationService.login(email, password).pipe(
+  //     map((auth: AuthModel) => {
+  //       const result = this.setAuthFromLocalStorage(auth);
+  //       return result;
+  //     }),
+  //     switchMap(() => this.getUserByToken()),
+  //     catchError((err) => {
+  //       console.error('err', err);
+  //       return of(undefined);
+  //     }),
+  //     finalize(() => this.isLoadingSubject.next(false))
+  //   );
+  // }
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
@@ -90,7 +119,7 @@ export class AuthService implements OnDestroy {
   // need create new user then login
   registration(user: UserModel): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.authHttpService.createUser(user).pipe(
+    return this.authenticationService.createUser(user).pipe(
       map(() => {
         this.isLoadingSubject.next(false);
       }),
@@ -102,6 +131,22 @@ export class AuthService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+  // registration(user: UserModel): Observable<any> {
+  //   this.isLoadingSubject.next(true);
+  //   return this.authHttpService.createUser(user).pipe(
+  //     map(() => {
+  //       this.isLoadingSubject.next(false);
+  //     }),
+  //     switchMap(() => this.login(user.email, user.password)),
+  //     catchError((err) => {
+  //       console.error('err', err);
+  //       return of(undefined);
+  //     }),
+  //     finalize(() => this.isLoadingSubject.next(false))
+  //   );
+  // }
+
+
 
   forgotPassword(email: string): Observable<boolean> {
     this.isLoadingSubject.next(true);

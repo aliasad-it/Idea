@@ -22,10 +22,53 @@ export class AuthenticationService {
  
   
 
-  getAuthentication(userdata: any): Observable<any> {
-    console.log("Authentication service ", userdata);
-    return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , userdata );
+  login(email: string, password: string): Observable<any> {
+    let user1 = {
+      "email": email, "password":password
+    }
+    console.log("Authentication service ", user1);
+    return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , user1 );
   }
+
+  createUser(user: UserModel): Observable<any> {
+    user.roles = [2]; // Manager
+    user.authToken = 'auth-token-' + Math.random();
+    user.refreshToken = 'auth-token-' + Math.random();
+    user.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
+    user.pic = './assets/media/avatars/300-1.jpg';
+
+    return this.http.post(GLOBAL.serviceUrl + '/user/registerUser', user);
+  }
+
+    // login(email: string, password: string): Observable<any> {
+    // const notFoundError = new Error('Not Found');
+    // if (!email || !password) {
+    //   return of(notFoundError);
+    // }
+   
+    // return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , user1 ).pipe(
+    //     map((result: UserModel[]) => {
+    //       if (result.length <= 0) {
+    //         return notFoundError;
+    //       }
+  
+    //       const user = result.find((u) => {
+    //         return (
+    //           u.email.toLowerCase() === email.toLowerCase() &&
+    //           u.password === password
+    //         );
+    //       });
+    //       if (!user) {
+    //         return notFoundError;
+    //       }
+  
+    //       const auth = new AuthModel();
+    //       auth.authToken = user.authToken;
+    //       auth.refreshToken = user.refreshToken;
+    //       auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
+    //       return auth;
+    //     })
+    //   );
 
   
 

@@ -79,35 +79,35 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   submit() {
     this.hasError = false;
-    let user1={email:this.f.email.value , password:this.f.password.value}
-    this.authenticationService.getAuthentication(user1).subscribe(data => {
-      console.log(data);
-      this.user=data.data;
+//     let user1={email:this.f.email.value , password:this.f.password.value}
+//     this.authenticationService.getAuthentication(user1).subscribe(data => {
+//       console.log(data);
+//       this.user=data.data;
       
-      // this.user = data.data;
-      // console.log(this.ideasList);
-    })
-     if(this.user) {
-      console.log('success', this.user);
-      this.router.navigate(['/dash']);
-   } else {
-    this.hasError = true;
-    this.router.navigate(['/dash']);
-  }
-}
-    // const loginSubscr = this.authService
-    //   .login(this.f.email.value, this.f.password.value)
-    //   .pipe(first())
-    //   .subscribe((user: UserModel | undefined) => {
-    //     if (user) {
-          // this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.hasError = true;
-    //     }
-    //   });
-    // this.unsubscribe.push(loginSubscr);
+//       // this.user = data.data;
+//       // console.log(this.ideasList);
+//     })
+//      if(this.user) {
+//       console.log('success', this.user);
+//       this.router.navigate(['/dash']);
+//    } else {
+//     this.hasError = true;
+//     this.router.navigate(['/dash']);
+//   }
+// }
+    const loginSubscr = this.authService
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe((user: UserModel | undefined) => {
+        if (user) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.hasError = true;
+        }
+      });
+    this.unsubscribe.push(loginSubscr);
   
-
+}
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
