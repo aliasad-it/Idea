@@ -13,6 +13,7 @@ import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
+import { CategoryFormComponent } from './pages/category-form/category-form.component';
 // import { IdeaFormModule } from './pages/idea-form/idea-form.module';
 // import { IdeaListModule } from './pages/idea-list/idea-list.module';
 // #fake-end#
@@ -27,7 +28,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CategoryFormComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
