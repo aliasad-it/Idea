@@ -34,9 +34,13 @@ export class AuthenticationService {
     user.roles = [2]; // Manager
     user.authToken = 'auth-token-' + Math.random();
     user.refreshToken = 'auth-token-' + Math.random();
+    // user.authToken= 'auth-token-6829bba69dd3421d8762-991e9e806dbf';
+    // user.refreshToken= 'auth-token-f8e4c61a318e4d618b6c199ef96b9e55';
     user.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
     user.pic = './assets/media/avatars/300-1.jpg';
-
+ 
+  
+  
     return this.http.post(GLOBAL.serviceUrl + '/user/registerUser', user);
   }
 

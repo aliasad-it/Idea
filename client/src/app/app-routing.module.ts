@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './modules/auth/services/auth.guard';
+import { CategoryFormComponent } from './pages/category-form/category-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
@@ -23,7 +24,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./_metronic/layout/layout.module').then((m) => m.LayoutModule),
   },
-  { path: '**', redirectTo: 'error/404' },
+  { path: 'category', component: CategoryFormComponent},
+  { path: '**', redirectTo: 'error/405' },
+ 
 ];
 
 @NgModule({

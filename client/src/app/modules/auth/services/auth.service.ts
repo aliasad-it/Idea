@@ -49,28 +49,25 @@ export class AuthService implements OnDestroy {
   login(email: string, password: string): Observable<UserType> {
     const notFoundError = new Error('Not Found');
     this.isLoadingSubject.next(true);
+    this.isLoadingSubject.next(false);
     // return this.authHttpService.login(email, password).pipe(
     return this.authenticationService.login(email, password).pipe(
-      map((user: UserModel) => {
-        console.log('user data from node', user)
-        if (!user) {
-          return notFoundError;
+      map((user: UserType) => {
+        if (user) {
+          const auth = new AuthModel();
+            auth.authToken = user.authToken;
+            auth.refreshToken = user.refreshToken;
+            auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);       
+            const result = this.setAuthFromLocalStorage(auth);
+      
+          this.currentUserSubject.next(user);
+        } else {
+          this.logout();
         }
-
-        const auth = new AuthModel();
-        auth.authToken = user.authToken;
-        auth.refreshToken = user.refreshToken;
-        auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);       
-        const result = this.setAuthFromLocalStorage(auth);
-        return result;
-      }),
-      switchMap(() => this.getUserByToken()),
-      catchError((err) => {
-        console.error('err', err);
-        return of(undefined);
+        return user;
       }),
       finalize(() => this.isLoadingSubject.next(false))
-    );
+  );
   }
   // login(email: string, password: string): Observable<UserType> {
   //   this.isLoadingSubject.next(true);
@@ -99,9 +96,10 @@ export class AuthService implements OnDestroy {
   getUserByToken(): Observable<UserType> {
     const auth = this.getAuthFromLocalStorage();
     if (!auth || !auth.authToken) {
+
       return of(undefined);
     }
-
+const user=localStorage.getItem('user');
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.authToken).pipe(
       map((user: UserType) => {
@@ -113,8 +111,8 @@ export class AuthService implements OnDestroy {
         return user;
       }),
       finalize(() => this.isLoadingSubject.next(false))
-    );
-  }
+   // );
+  )}
 
   // need create new user then login
   registration(user: UserModel): Observable<any> {

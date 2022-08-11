@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 const Routing: Routes = [
   {
@@ -6,6 +7,11 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  // {
+  //   path:'category',
+  //   loadChildren:() =>
+  //     import('./category-form/category.module').then((m)=> m.CategoryModule),
+  // },
   {
     path: 'builder',
     loadChildren: () =>
@@ -43,6 +49,7 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./idea-form/idea.module').then((m) => m.IdeaModule),
   },
+ 
   // {
   //   path: 'idea-lists',
   //   loadChildren: () =>

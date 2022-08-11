@@ -1,6 +1,7 @@
 <div class="card">
 <form
     class="form w-100 ideaformCont"
+    [formGroup]="ideaForm"
     novalidate="novalidate"
     id="kt_idea_form"
     (ngSubmit)="submit()">
@@ -31,6 +32,32 @@
           class="form-control form-control-lg form-control-solid"
           type="text"
           name="subject"
+          autocomplete="off"
+         
+        />
+ 
+      </div>
+
+
+      <div class="fv-row mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Category</label>
+        <input
+          class="form-control form-control-lg form-control-solid"
+          type="text"
+          name="cat_id"
+          autocomplete="off"
+         
+        />
+ 
+      </div>
+
+
+      <div class="fv-row mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
+        <input
+          class="form-control form-control-lg form-control-solid"
+          type="text"
+          name="f_area_id"
           autocomplete="off"
          
         />
@@ -78,12 +105,13 @@
     
       <!--begin::Action-->
       <div class="text-center">
-        <button
+        <button (click)="submit()"
           type="submit"
           id="kt_sign_in_submit"
+    
           class="btn btn-lg btn-primary w-100 mb-5"
         >Submit
-          <!-- <ng-container *ngIf="isLoading$ | async">
+          <!---- <ng-container *ngIf="isLoading$ | async">
             <span class="indicator-progress" [style.display]="'block'">
               Please wait...
               <span

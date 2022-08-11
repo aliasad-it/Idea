@@ -1,4 +1,4 @@
-<div class="row g-5 g-xl-8">
+< <div class="row g-5 g-xl-8">
   <div *ngFor="let dep of departments" class="col-xl-3">
     <app-stats-widget5 (click)="ideaForm(dep)"
       svgIcon={{dep.svgIcon}}
@@ -10,5 +10,147 @@
     ></app-stats-widget5>
   </div>
 
-</div>
+</div> 
 
+<div class= "row">
+  <div class="col-md-6" no-gutters>
+<div class="row g-5 g-xl-8">
+  <!-- <div *ngFor="let dep of departments" class="col-xl-3">
+    <app-stats-widget5 (click)="ideaForm(dep)"
+      svgIcon={{dep.svgIcon}}
+      class={{dep.class}}
+      color={{dep.color}}
+      iconColor={{dep.iconColor}}
+      title={{dep.title}}
+      description={{dep.description}}
+    ></app-stats-widget5>
+  </div> -->
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table id="t1"
+        class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"
+        >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th>SN</th>
+            <th class="min-w-150px">Idea Subject</th>
+            <th class="min-w-140px">Description</th>
+            <th class="min-w-120px">Date</th>
+            <th class="min-w-120px">Presented By</th>
+            <th>Status</th>
+            <th class="min-w-100px text-end">Actions</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody *ngIf="ideasList.length > 0">
+         
+          <ng-container *ngFor='let idea of ideasList; let idx = index'>
+            
+          <tr >
+            <td> {{idx + 1}} </td>
+            <td>{{idea.subject}}</td>
+            <td>{{idea.description}}</td>
+            <td>{{idea.date}}</td>
+            <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.presentedBy}}</td>
+            <td>
+              <span class="badge badge-light-success">{{idea.status}}</span>
+            </td>
+            <td class="text-end">
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <span class="svg-icon svg-icon-3"> </span>
+              </a>
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <span class="svg-icon svg-icon-3"></span>
+              </a>
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                <span class="svg-icon svg-icon-3"></span>
+              </a>
+            </td>
+          </tr>
+        </ng-container>
+       
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
+</div>
+</div>
+<!--secound side-->
+<div class="col-md-6" no-gutters>
+<div class="row g-5 g-xl-8">
+  <!-- <div *ngFor="let dep of departments" class="col-xl-3">
+    <app-stats-widget5 (click)="ideaForm(dep)"
+      svgIcon={{dep.svgIcon}}
+      class={{dep.class}}
+      color={{dep.color}}
+      iconColor={{dep.iconColor}}
+      title={{dep.title}}
+      description={{dep.description}}
+    ></app-stats-widget5>
+  </div> -->
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table id="t2"
+        class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"
+      >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th>SN</th>
+            <th class="min-w-150px">Idea Subject</th>
+            <th class="min-w-140px">Description</th>
+            <th class="min-w-120px">Date</th>
+            <th class="min-w-120px">Presented By</th>
+            <th>Status</th>
+            <th class="min-w-100px text-end">Actions</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody *ngIf="ideasList.length > 0">
+          
+          <ng-container *ngFor='let idea of ideasList; let idx = index'>
+          <tr >
+            <td> {{idx + 1}} </td>
+            <td>{{idea.subject}}</td>
+            <td>{{idea.description}}</td>
+            <td>{{idea.date}}</td>
+            <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.presentedBy}}</td>
+            <td>
+              <span class="badge badge-light-success">{{idea.status}}</span>
+            </td>
+            <td class="text-end">
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <span class="svg-icon svg-icon-3"> </span>
+              </a>
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <span class="svg-icon svg-icon-3"></span>
+              </a>
+              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                <span class="svg-icon svg-icon-3"></span>
+              </a>
+            </td>
+          </tr>
+        </ng-container>
+       
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
+</div>
+</div>
+</div>

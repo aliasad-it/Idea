@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
+import { IdeaService } from 'src/app/services/idea.service';
+
 @Component({
   selector: 'app-idea-form',
   templateUrl: './idea-form.component.html',
   styleUrls: ['./idea-form.component.scss']
 })
 export class IdeaFormComponent implements OnInit {
+  user: any;
+  ideaForms: any;
   ideaForm: FormGroup;
   hasError: boolean;
   returnUrl: string;
@@ -16,7 +20,8 @@ export class IdeaFormComponent implements OnInit {
   private unsubscribe: Subscription[] = [];
   constructor(
     public router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public ideasService: IdeaService
     ) { }
 
   ngOnInit(): void {
@@ -29,8 +34,19 @@ export class IdeaFormComponent implements OnInit {
   }
 
   submit() {
+    console.log("Idea is new");
     this.hasError = false;
-  
+   
+    this.ideasService.getNewIdea(this.user).subscribe(data => {
+      console.log(data);
+      this.ideaForms = data.data;
+      console.log(this.ideaForms);
+    }); 
+      
+   
+    
+    
+    
   }
 
   ngOnDestroy() {
