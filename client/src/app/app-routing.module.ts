@@ -8,6 +8,7 @@ export const routes: Routes = [
   {
     path: 'dash', component:DashboardComponent
   },
+  // { path: 'category-form', component: CategoryFormComponent},
   {
     path: 'auth',
     loadChildren: () =>
@@ -24,7 +25,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./_metronic/layout/layout.module').then((m) => m.LayoutModule),
   },
-  { path: 'category', component: CategoryFormComponent},
+ 
   { path: '**', redirectTo: 'error/405' },
  
 ];

@@ -10,29 +10,27 @@ import { Subscription, Observable } from 'rxjs';
   styleUrls: ['./category-form.component.scss']
 })
 export class CategoryFormComponent implements OnInit {
-  categoryForm: FormGroup;
-  hasError: boolean;
-  returnUrl: string;
-  isLoading$: Observable<boolean>;
+;
  
   private unsubscribe: Subscription[] = [];
   constructor(
     public router: Router,
-    private fb: FormBuilder
   ) { }
  
-  
-  submit() {
-    this.hasError = false;
-  
-  }
+
   ngOnInit(): void {
+    console.log('category page');
     // this.category= history.state;
     // console.log(history.state);
   }
 
-  ngOnDestroy() {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
-  }
+  // submit() {
+  //   this.hasError = false;
+  
+  // }
+
+  // ngOnDestroy() {
+  //   this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  // }
 
 }

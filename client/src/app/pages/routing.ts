@@ -7,6 +7,7 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  { path: 'category-form', component: CategoryFormComponent},
   // {
   //   path:'category',
   //   loadChildren:() =>
@@ -49,6 +50,7 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./idea-form/idea.module').then((m) => m.IdeaModule),
   },
+  
  
   // {
   //   path: 'idea-lists',

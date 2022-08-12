@@ -30,7 +30,7 @@ export class IdeaService {
  
   
   
-    return this.http.post(GLOBAL.serviceUrl + '/ideas/getNewIdea', newidea);
+    return this.http.post(GLOBAL.serviceUrl + '/ideas/saveIdea', newidea);
   }
 
 }

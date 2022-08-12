@@ -161,11 +161,11 @@ export class DashboardComponent implements OnInit {
       title:"IT",
       description:"Information Technology"}]
 
-      ideaForm(dep: any){
+      ideaForm(){
    
-        console.log(dep);
-        //this.router.navigateByUrl('/idea-form');
-        this.router.navigateByUrl('/idea/form', { state: dep })
+        console.log('dep');
+        // this.router.navigateByUrl('/idea-form');
+        // this.router.navigateByUrl('/idea/form', { state: dep })
     
       }
   }

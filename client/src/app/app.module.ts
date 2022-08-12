@@ -49,6 +49,9 @@ function appInitializer(authService: AuthService) {
     InlineSVGModule.forRoot(),
     NgbModule,
   ],
+  entryComponents:[
+    CategoryFormComponent
+  ],
   providers: [
     {
       provide: APP_INITIALIZER,

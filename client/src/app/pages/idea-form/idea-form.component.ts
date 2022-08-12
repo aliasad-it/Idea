@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, NgForm, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
 
@@ -17,6 +17,12 @@ export class IdeaFormComponent implements OnInit {
   returnUrl: string;
   isLoading$: Observable<boolean>;
   department:any;
+  subject:String;
+  description: String;
+  attachment: any;
+  cat_id: String;
+  func_area: String;
+
   private unsubscribe: Subscription[] = [];
   constructor(
     public router: Router,
@@ -25,7 +31,7 @@ export class IdeaFormComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.department= history.state;
+    
     console.log(history.state);
     // this.router.getCurrentNavigation().extras.state
   }
@@ -33,11 +39,11 @@ export class IdeaFormComponent implements OnInit {
     return this.ideaForm.controls;
   }
 
-  submit() {
-    console.log("Idea is new");
+  submit(form: NgForm) {
+    console.log("Idea is new", form.value);
     this.hasError = false;
    
-    this.ideasService.getNewIdea(this.user).subscribe(data => {
+    this.ideasService.getNewIdea(form.value).subscribe(data => {
       console.log(data);
       this.ideaForms = data.data;
       console.log(this.ideaForms);
