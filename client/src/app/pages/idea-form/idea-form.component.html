@@ -1,9 +1,32 @@
 <div class="card">
-<form
-    class="form w-100 ideaformCont"
+  <form
+  class="form w-100 ideaformCont"
     novalidate="novalidate"
     id="kt_idea_form"
     #categoryForm ="ngForm">
+
+  <div class="row">
+    <div class="col-md-2 offset-md-10 text-center">
+      <!-- <button
+        type="button"
+        id="kt_sign_in_back"
+  
+        class="btn btn-lg btn-gray w-100 mb-5"
+      >Back
+       
+      </button> -->
+      <a
+routerLink="/dashboard"
+class="btn btn-lg btn-light-primary"
+>
+-Back
+</a>
+    </div>
+      <!-- begin::Separator  -->
+    </div>
+
+
+    
         
       <!--end::Heading-->
     
@@ -25,7 +48,7 @@
       <div class="fv-row mb-10">
         <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
         <input
-          class="form-control form-control-lg form-control-solid"
+          class="border border-primary form-control form-control-lg form-control-solid"
           type="text"
           name="subject"
           autocomplete="off"
@@ -34,32 +57,69 @@
  
       </div>
 
-
-      <div class="fv-row mb-10">
+<div class="row mb-10">
+      <div class="col-md-4">
         <label class="form-label fs-6 fw-bolder text-dark">Category</label>
-        <input
-          class="form-control form-control-lg form-control-solid"
+        <Select class="border border-primary form-control form-control-lg form-control-solid"
+          name="categoryname" id="cat_id">
+          <option value="1">Business Process</option>
+          <option value="7">Services</option>
+          <option value="8">Working Environment</option>
+          
           type="text"
           name="cat_id"
           autocomplete="off"
           [(ngModel)]="cat_id"
          
-        />
+        </Select>
  
       </div>
 
 
-      <div class="fv-row mb-10">
+      <div class="col-md-4">
         <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
-        <input
-          class="form-control form-control-lg form-control-solid"
-          type="text"
+        <select class="border border-primary form-control form-control-lg form-control-solid"
+           name="function-area" id="f_area_id">
+          <option value="1">IT</option>
+          <option value="2">Sale</option>
+          <option value="3">Shipping</option>
+          <option value="4">Prodution</option>
+          <option value="5">Accounts</option>
+          <option value="6">Audit</option>
+          <option value="7">Admin</option>
+          <option value="8">HR</option>
+        <!-- --> 
+        type="text"
           name="f_area_id"
           autocomplete="off"
-          [(ngModel)]="func_area"
+          [(ngModel)]="f_area_id"
+         
+        </select> 
+ 
+      </div>
+        
+          
+          
+
+      <div class="col-md-4">
+        <!-- <div class="d-flex justify-content-between mt-n5"> -->
+          <!-- <div class="d-flex flex-stack mb-2"> -->
+            <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
+           
+          <!-- </div> -->
+        <!-- </div> -->
+    
+        <input
+          class="border border-primary form-control form-control-lg form-control-solid attachment"
+          type="file"
+          name="attachment"
+          autocomplete="off"
+          [(ngModel)]="attachment"
         />
  
       </div>
+
+    </div>
       <!--end::Form group-->
     
       <!--begin::Form group-->
@@ -72,7 +132,7 @@
         </div>
     
         <textarea
-          class="form-control form-control-lg form-control-solid description"
+          class="border border-primary form-control form-control-lg form-control-solid description"
           type="text"
           name="description"
           autocomplete="off"
@@ -81,46 +141,21 @@
  
       </div>
 
-      <div class="fv-row mb-10">
-        <div class="d-flex justify-content-between mt-n5">
-          <div class="d-flex flex-stack mb-2">
-            <label class="form-label fw-bolder text-dark fs-6 mb-0">Attachment</label>
-           
-          </div>
-        </div>
-    
-        <input
-          class="form-control form-control-lg form-control-solid attachment"
-          type="file"
-          name="attachment"
-          autocomplete="off"
-          [(ngModel)]="attachment"
-        />
- 
-      </div>
+      
       <!--end::Form group-->
     
       <!--begin::Action-->
-      <div class="text-center">
+      <div class="row align-items-end">
+      <div class="col-md-2 offset-md-10 text-center">
         <button (click)="submit(categoryForm)"
           type="submit"
           id="kt_sign_in_submit"
     
           class="btn btn-lg btn-primary w-100 mb-5"
         >Submit
-          <!---- <ng-container *ngIf="isLoading$ | async">
-            <span class="indicator-progress" [style.display]="'block'">
-              Please wait...
-              <span
-                class="spinner-border spinner-border-sm align-middle ms-2"
-              ></span>
-            </span>
-          </ng-container>
-          <ng-container *ngIf="!(isLoading$ | async)">
-            <span class="indicator-label">Continue</span>
-          </ng-container> -->
+         
         </button>
-    
+      </div>
         <!-- begin::Separator  -->
       </div>
       <!--end::Action-->

@@ -21,11 +21,14 @@ export class IdeaService {
     return this.http.post(GLOBAL.serviceUrl + '/ideas/getIdeasList' , userdata );
   }
 
-  getNewIdea(newidea: any): Observable<any> {
+  getSaveIdea(newidea: any): Observable<any> {
+
     newidea.roles = [3]; // Manager
     console.log("New Idea service ", newidea);
     newidea.last_update = new Date(Date.now() );
     newidea.idea_status = 'New';
+    
+
     newidea.pic = './assets/media/avatars/300-1.jpg';
  
   

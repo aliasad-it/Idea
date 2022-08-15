@@ -53,7 +53,10 @@ export class AuthService implements OnDestroy {
     // return this.authHttpService.login(email, password).pipe(
     return this.authenticationService.login(email, password).pipe(
       map((user: UserType) => {
+        
         if (user) {
+          console.log(user);
+          localStorage.setItem('user', JSON.stringify(user));
           const auth = new AuthModel();
             auth.authToken = user.authToken;
             auth.refreshToken = user.refreshToken;

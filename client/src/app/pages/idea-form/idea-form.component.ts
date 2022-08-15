@@ -21,7 +21,11 @@ export class IdeaFormComponent implements OnInit {
   description: String;
   attachment: any;
   cat_id: String;
-  func_area: String;
+  f_area_id: String;
+  last_update: any;
+  idea_status: any;
+  updateby: any;
+  userdata: any;
 
   private unsubscribe: Subscription[] = [];
   constructor(
@@ -32,7 +36,8 @@ export class IdeaFormComponent implements OnInit {
 
   ngOnInit(): void {
     
-    console.log(history.state);
+    this.userdata=localStorage.getItem('user');
+    this.userdata=JSON.parse(this.userdata);        
     // this.router.getCurrentNavigation().extras.state
   }
   get f() {
@@ -41,11 +46,14 @@ export class IdeaFormComponent implements OnInit {
 
   submit(form: NgForm) {
     console.log("Idea is new", form.value);
+    form.value['updateby'] = Number(this.userdata.userid);
+    console.log(form.value);
     this.hasError = false;
    
-    this.ideasService.getNewIdea(form.value).subscribe(data => {
+    this.ideasService.getSaveIdea(form.value).subscribe(data => {
       console.log(data);
       this.ideaForms = data.data;
+     
       console.log(this.ideaForms);
     }); 
       

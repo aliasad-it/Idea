@@ -1,16 +1,14 @@
-<!-- <p>category-form works!</p> -->
-   
-
+<!-- <p>function-area works!</p> -->
 <div class="card">
     <form
         class="form w-100 category-formCont"
         novalidate="novalidate"
-        id="kt_category_form"
-        #cateForm ="ngForm">
+        id="kt_farea_form"
+        #fareaForm ="ngForm">
             
         <div class="col-md-2 offset-md-10 mb-10">
-            <!-- <h1 class="text-dark mb-3">Create New Category</h1> -->
-      <a
+            <!-- <h1 class="text-dark mb-3">Create Function Area</h1> -->
+  <a
 routerLink="/dashboard"
 class="btn btn-lg btn-light-primary"
 >
@@ -26,35 +24,34 @@ class="btn btn-lg btn-light-primary"
             </div>
           </ng-container>
 
-
           <div class="row mb-10">
+
           <div class="fv-row col-md-2 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">Category ID</label>
+            <label class="form-label fs-6 fw-bolder text-dark">Function Area ID</label>
             <input
               class="border border-primary form-control form-control-lg form-control-solid"
               type="text"
-              name="cat_id"
+              name="f_area_id"
               autocomplete="off"
-              [(ngModel)]="cat_id"
+              [(ngModel)]="f_area_id"
             />
      
           </div>
 
           <div class="fv-row col-md-4 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">Category Name</label>
+            <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
             <input
               class="border border-primary form-control form-control-lg form-control-solid"
               type="text"
-              name="cat_desc"
+              name="f_area_desc"
               autocomplete="off"
-              [(ngModel)]="cat_desc"
+              [(ngModel)]="f_area_desc"
             />
-     
-          </div>
+     </div>
           </div>
           <div class="fv-row align-items-end">
-            <div class="col-md-2 offset-md-10 text-center">
-            <button (click)="submit(cateForm)"
+          <div class="col-md-2 offset-md-10 text-center">
+            <button (click)="submit(fareaForm)"
               type="submit" 
               id="kt_sign_in_submit"
               class="btn btn-lg btn-primary w-100 mb-5"

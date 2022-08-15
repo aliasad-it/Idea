@@ -1,12 +1,14 @@
 import { Routes } from '@angular/router';
 import { CategoryFormComponent } from './category-form/category-form.component';
-
+import { FunctionAreaComponent } from './function-area/function-area.component';
 const Routing: Routes = [
   {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  { path: 'function-area', component: FunctionAreaComponent},
+
   { path: 'category-form', component: CategoryFormComponent},
   // {
   //   path:'category',
