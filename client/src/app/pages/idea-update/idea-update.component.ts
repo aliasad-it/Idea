@@ -5,11 +5,11 @@ import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
 
 @Component({
-  selector: 'app-idea-form',
-  templateUrl: './idea-form.component.html',
-  styleUrls: ['./idea-form.component.scss']
+  selector: 'app-idea-update',
+  templateUrl: './idea-update.component.html',
+  styleUrls: ['./idea-update.component.scss']
 })
-export class IdeaFormComponent implements OnInit {
+export class IdeaUpdateComponent implements OnInit {
   user: any;
   ideaForms: any;
   ideaForm: FormGroup;
@@ -18,40 +18,48 @@ export class IdeaFormComponent implements OnInit {
   returnUrl: string;
   isLoading$: Observable<boolean>;
   department:any;
+  idea_id:any;
   subject:String;
   description: String;
   attachment: any;
   cat_id: String;
   f_area_id: String;
+  f_area_desc:any;
   last_update: any;
   idea_status: any;
   updateby: any;
   userdata: any;
-
-  private unsubscribe: Subscription[] = [];
+  idea:any;
   constructor(
     public router: Router,
     private fb: FormBuilder,
     public ideasService: IdeaService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    
     this.userdata=localStorage.getItem('user');
-    this.userdata=JSON.parse(this.userdata);        
-    // this.router.getCurrentNavigation().extras.state
+    this.userdata=JSON.parse(this.userdata);    
+    this.idea=history.state;
+    console.log(this.idea);
+    this.idea_id = this.idea.idea_id;
+    this.subject = this.idea.subject;
+    this.description = this.idea.description;
+    this.cat_id = this.idea.cat_id;
+    this.f_area_id = this.idea.f_area_id;
+    this.f_area_desc = this.idea.f_area_desc;
+    this.last_update= this.idea.last_update;
+    this.updateby = this.idea.updateby;
   }
   get f() {
     return this.ideaForm.controls;
   }
-
   submit(form: NgForm) {
-    console.log("Idea is new", form.value);
+    console.log("Idea is updated", form.value);
     form.value['updateby'] = Number(this.userdata.userid);
     console.log(form.value);
     this.hasError = false;
    
-    this.ideasService.getSaveIdea(form.value).subscribe(data => {
+    this.ideasService.getIdeaUpdate(form.value).subscribe(data => {
       console.log(data);
       if (data.status){
         this.router.navigateByUrl('/dashboard')
@@ -63,15 +71,5 @@ export class IdeaFormComponent implements OnInit {
      
       console.log(this.ideaForms);
     }); 
-      
-   
-    
-    
-    
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
-  }
-
+}
 }

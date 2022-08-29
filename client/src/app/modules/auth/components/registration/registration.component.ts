@@ -77,6 +77,15 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.maxLength(100),
           ]),
         ],
+
+        FunctionArea: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(100),
+          ]),
+        ],
         agree: [false, Validators.compose([Validators.required])],
       },
       {

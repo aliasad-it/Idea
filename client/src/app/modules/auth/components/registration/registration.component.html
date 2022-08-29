@@ -230,6 +230,46 @@
       </div>
     </ng-container>
   </div>
+
+  <div class="mb-10 fv-row">
+    <label class="form-label fw-bolder text-dark fs-6">Function Area</label>
+    <input
+      class="form-control form-control-lg form-control-solid"
+      type="FunctionArea"
+      placeholder="FunctionArea"
+      name="FunctionArea"
+      formControlName="FunctionArea"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': registrationForm.controls['FunctionArea'].invalid,
+        'is-valid': registrationForm.controls['FunctionArea'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Function Area is required',
+        control: registrationForm.controls['FunctionArea']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Function Area should have at least 3 symbols',
+        control: registrationForm.controls['FunctionArea']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Function Area should have maximum 100 symbols',
+        control: registrationForm.controls['FunctionArea']
+      }"
+    ></ng-container>
+  </div>
   <!--end::Form group-->
 
   <!--begin::Form group-->

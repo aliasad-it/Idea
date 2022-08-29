@@ -18,7 +18,14 @@ export class IdeaService {
 
   getIdeaList(userdata: any): Observable<any> {
     console.log("Idea list service ", userdata);
+    
     return this.http.post(GLOBAL.serviceUrl + '/ideas/getIdeasList' , userdata );
+  }
+
+  PresentTo(userdata: any): Observable<any> {
+    console.log("present to service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/ideas/PresentTo' , userdata );
   }
 
   getSaveIdea(newidea: any): Observable<any> {
@@ -35,5 +42,20 @@ export class IdeaService {
   
     return this.http.post(GLOBAL.serviceUrl + '/ideas/saveIdea', newidea);
   }
+  
+  getIdeaUpdate(userdata: any): Observable<any> {
+    console.log("Idea updated ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/ideas/getIdeasUpdate' , userdata );
+  }
 
+  SelectIdea(idea_id:any): Observable<any> {
+    console.log("Select Idea service ",idea_id );
+    
+    return this.http.get(GLOBAL.serviceUrl + '/ideas/SelectIdea/' + idea_id );
+  }
+  getAllUsers(): Observable<any> {
+    
+    return this.http.get(GLOBAL.serviceUrl + '/user/getAllUsers');
+  }
 }

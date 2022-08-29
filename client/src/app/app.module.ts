@@ -16,6 +16,14 @@ import { FakeAPIService } from './_fake/fake-api.service';
 import { CategoryFormComponent } from './pages/category-form/category-form.component';
 import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
 import { FunctionAreaComponent } from './pages/function-area/function-area.component';
+import { CategoryListComponent } from './pages/category-list/category-list.component';
+import { FunctionListComponent } from './pages/function-list/function-list.component';
+import { CategoryUpdateComponent } from './pages/category-update/category-update.component';
+import { FunctionUpdateComponent } from './pages/function-update/function-update.component';
+import { IdeaUpdateComponent } from './pages/idea-update/idea-update.component';
+import { WorkFlowComponent } from './pages/work-flow/workflow.component';
+import { WorkFlowFormComponent } from './pages/workflow-form/workflow-form.component';
+import { ReviewFormComponent } from './pages/review-form/review-form.component';
 // import { IdeaFormModule } from './pages/idea-form/idea-form.module';
 // import { IdeaListModule } from './pages/idea-list/idea-list.module';
 // #fake-end#
@@ -30,7 +38,18 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, CategoryFormComponent, FunctionAreaComponent],
+  declarations: [AppComponent, 
+    CategoryFormComponent, 
+    FunctionAreaComponent, 
+    CategoryListComponent, 
+    FunctionListComponent, 
+    CategoryUpdateComponent, 
+    FunctionUpdateComponent, 
+    IdeaUpdateComponent,
+    WorkFlowComponent,
+    WorkFlowFormComponent,
+    ReviewFormComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -13,12 +13,15 @@ import { IdeaService } from 'src/app/services/idea.service';
 
 export class IdeaListComponent implements OnInit {
   ideasList:any;
-  user:{}={name:'ali'}
+   userdata: any;
   constructor(public ideasService: IdeaService){
     
   }
 
   ngOnInit(): void {
+
+    this.userdata=localStorage.getItem('user');
+    this.userdata=JSON.parse(this.userdata);  
   //  this.ideasList=[
     // {
     //     "subject": "@sujbect",
@@ -37,7 +40,7 @@ export class IdeaListComponent implements OnInit {
 //         "department": "IT"
 //     }
 //  ]
-    this.ideasService.getIdeaList(this.user).subscribe(data => {
+    this.ideasService.getIdeaList(this.userdata).subscribe(data => {
       console.log(data);
       this.ideasList = data.data;
       console.log(this.ideasList);

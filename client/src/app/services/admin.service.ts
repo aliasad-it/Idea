@@ -43,4 +43,60 @@ export class AdminService {
     return this.http.post(GLOBAL.serviceUrl + '/admin/addFarea', addfarea);
   }
 
+  getCategoryList(userdata: any): Observable<any> {
+    console.log("Category list service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getCategoryList' , userdata );
+  }
+  getCategoryUpdate(userdata: any): Observable<any> {
+    console.log("Category update service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getCategoryUpdate' , userdata );
+  }
+  getFunctionList(userdata: any): Observable<any> {
+    console.log("Function list service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getFunctionList' , userdata );
+  }
+  getFareaUpdate(userdata: any): Observable<any> {
+    console.log("Farea update service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getFareaUpdate' , userdata );
+  }
+  getWorkFlows(userdata: any): Observable<any> {
+    console.log("WorkFlow service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getWorkFlows' , userdata );
+  }
+  SaveWorkflow(workflow: any): Observable<any> {
+    console.log(workflow);
+    return this.http.post(GLOBAL.serviceUrl + '/admin/saveWorkflow', workflow);
+  }
+  updateWorkflow(workflow: any): Observable<any> {
+    console.log(workflow);
+    return this.http.post(GLOBAL.serviceUrl + '/admin/updateWorkflow', workflow);
+  }
+  getWrkflow(wflowid: any): Observable<any> {
+    console.log(wflowid);
+    return this.http.get(GLOBAL.serviceUrl + '/admin/getWorkflow/'+ wflowid);
+  }
+  getReviewList(idea_id:any, userid:any): Observable<any> {
+    console.log("Review list service ",idea_id );
+    
+    return this.http.get(GLOBAL.serviceUrl + '/admin/getReviewList/' + idea_id+'/'+userid );
+  }
+  SaveReview(reviews:any): Observable<any> {
+    console.log();
+    reviews.last_update = new Date(Date.now() );
+   
+    return this.http.post(GLOBAL.serviceUrl + '/admin/SaveReview',  reviews );
+  }
+  updateReview(review: any): Observable<any> {
+    console.log(review);
+    return this.http.post(GLOBAL.serviceUrl + '/admin/updateReview', review);
+  }
+  getCriteria(): Observable<any> {
+    console.log('criteria');
+    return this.http.get(GLOBAL.serviceUrl + '/admin/getCriteria');
+  }
 }
