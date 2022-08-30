@@ -101,7 +101,8 @@ export class ReviewFormComponent implements OnInit {
                 score: '',
                 comment: '',
                 updateby: this.userdata.userid,
-                idea_id: this.idea_id
+                idea_id: this.idea_id,
+                last_update: new Date(Date.now() )
               }	
                 this.reviews.push(review)
                 this.cd.detectChanges()
@@ -120,16 +121,16 @@ export class ReviewFormComponent implements OnInit {
     return this.reviewForm.controls;
   }
 
-  submit(form: NgForm) {
+  submit(form: NgForm,mode:string) {
     console.log("review is new", form.value);
     
-    console.log(form.value);
+    console.log(this.reviews);
     this.hasError = false;
-   
-    this.adminService.SaveReview(this.reviews).subscribe(data => {
+   var data = {reviewer:'level1_user',idea_status:mode,reviews:this.reviews,idea_id:this.idea_id}
+    this.adminService.SaveReview(data).subscribe(data => {
       console.log(data);
       if (data.status){
-        this.router.navigateByUrl('/review-form')
+        this.router.navigateByUrl('/dashboard')
        }else {
         this.hasError = true;
         this.ErrorMassage = 'Failed to submit.';

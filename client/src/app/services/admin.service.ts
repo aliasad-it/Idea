@@ -87,7 +87,7 @@ export class AdminService {
   }
   SaveReview(reviews:any): Observable<any> {
     console.log();
-    reviews.last_update = new Date(Date.now() );
+   
    
     return this.http.post(GLOBAL.serviceUrl + '/admin/SaveReview',  reviews );
   }
