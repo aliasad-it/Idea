@@ -14,9 +14,13 @@ import { IdeaService } from 'src/app/services/idea.service';
 export class IdeaListComponent implements OnInit {
   ideasList:any;
    userdata: any;
-  constructor(public ideasService: IdeaService){
-    
-  }
+   idea:any;
+   hasError: boolean;
+  constructor(
+    public ideasService: IdeaService,
+    public router: Router,
+    private fb: FormBuilder,
+    ){}
 
   ngOnInit(): void {
 
@@ -45,6 +49,15 @@ export class IdeaListComponent implements OnInit {
       this.ideasList = data.data;
       console.log(this.ideasList);
     });
+  
+  }
+  ideaUpdate(idea:any){
+   if( idea.idea_status=='New'){
+    this.router.navigateByUrl('/idea-update', { state: idea })
+   }
+   else{
+    this.hasError= true;
+   }
   }
 }
 

@@ -30,6 +30,14 @@ export class AuthenticationService {
     return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , user1 );
   }
 
+  ChangePass(password: string): Observable<any> {
+    let user1 = {
+      "password":password
+    }
+    console.log("Authentication service ", user1);
+    return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , user1 );
+  }
+
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager
     user.authToken = 'auth-token-' + Math.random();

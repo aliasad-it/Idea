@@ -9,14 +9,14 @@
       novalidate="novalidate"
       id="kt_review_form"
       #reviewForm ="ngForm">
-      
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1 pt-5">Review Idea</span>
+        <span class="text-muted mt-1 fw-bold fs-7"></span>
+      </h3>  
 <div class="row"> 
   <div class="col-md-2 offset-md-10 text-center">
  
-    <h3 class="card-title align-items-start flex-column">
-      <span class="card-label fw-bolder fs-3 mb-1 pt-5">Review</span>
-      <span class="text-muted mt-1 fw-bold fs-7"></span>
-    </h3>  
+   
  
     <!-- <button
           type="button"
@@ -30,7 +30,7 @@
   routerLink="/dashboard"
   class="btn btn-sm btn-light-primary"
   >
-  -Back
+  < Back
   </a>
       </div>
         <!-- begin::Separator  -->
@@ -78,13 +78,14 @@
               <!-- </div> -->
             <!-- </div> -->
         
-            <input
-              class="border border-primary form-control form-control-lg form-control-solid attachment"
-              type="file"
-              name="attachment"
-              autocomplete="off"
-              [(ngModel)]="attachment"
-            />
+            <button disabled
+              type="submit"
+              id="kt_sign_in_submit"
+        
+              class="btn col-md-1 btn-sm btn-primary w-55 mb-5"
+            >View Attachment
+              
+            </button>
      
           </div>
   
@@ -104,14 +105,14 @@
           <div class="row">
         <div class="col-md-3">
           <label class="form-label fs-6 fw-bolder text-dark">Reviewer</label>
-         <p>1st Level Approver</p>
+         <p class="present_to">{{present_to}}</p>
    
         </div>
   
   
         <div class="col-md-3">
           <label class="form-label fs-6 fw-bolder text-dark">Review Status</label>
-          <p>{{idea_status}}</p>
+          <p [ngClass]="idea_status">{{idea_status}}</p>
            
         
    
@@ -191,7 +192,7 @@
         <div class="row">
         <div class="col-md-2 offset-md-6 text-center"> 
             
-          <button (click)="submit(reviewForm,'Save')"
+          <button (click)="submit(reviewForm,'Saved')"
             type="submit"
             id="kt_sign_in_submit"
       

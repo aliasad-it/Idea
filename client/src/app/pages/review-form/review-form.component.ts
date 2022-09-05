@@ -38,7 +38,9 @@ export class ReviewFormComponent implements OnInit {
   reviews:any=[];
   idealist:any;
   f_area_desc:any;
-
+  present_to:any;
+  reviewer:any;
+  
   constructor(
     public router: Router,
     private fb: FormBuilder,
@@ -49,9 +51,15 @@ export class ReviewFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.mode = this.route.snapshot.paramMap.get('mode');
+    this.userdata=localStorage.getItem('user');
+    this.userdata=JSON.parse(this.userdata); 
+    
+   
+    // this.mode = this.route.snapshot.paramMap.get('mode');
     // if(this.mode == 'edit'){
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         this.idea_id= this.route.snapshot.paramMap.get('idea_id');
+
         this.ideasService.SelectIdea(this.idea_id).subscribe(idea => {
             console.log(idea);
             this.subject=idea.data[0].subject;
@@ -59,13 +67,26 @@ export class ReviewFormComponent implements OnInit {
             this.attachment=idea.data[0].attachment;
             this.f_area_desc=idea.data[0].f_area_desc;
             this.idea_status=idea.data[0].idea_status;
+            this.present_to=idea.data[0].present_to;
+            this.reviewer=idea.data[0].reviewer;
+            if (idea.data[0].level1_user==this.userdata.userid){
+              this.reviewer='1st Level Reviewer';
+              
+            }
+            else if(idea.data[0].level2_user==this.userdata.userid){
+              this.reviewer='2nd Level Reviewer';
+        
+            }
+            else if(idea.data[0].level3_user==this.userdata.userid){
+              this.reviewer='3rd Level Reviewer';
+              
+            }
             this.cd.detectChanges();
             //this.users=users.data
         })
     
 
-    this.userdata=localStorage.getItem('user');
-    this.userdata=JSON.parse(this.userdata);  
+     
 
     this.adminService.getCriteria().subscribe((data: any) => {
       console.log(data)
@@ -83,6 +104,7 @@ export class ReviewFormComponent implements OnInit {
               criteria_name:criteria.criteria_name,
               score: this.reviewlist[rIndex].score,
               comment: this.reviewlist[rIndex].comment,
+              last_update: new Date(Date.now() ),
               updateby: this.reviewlist[rIndex].updateby,
               idea_id: this.reviewlist[rIndex].idea_id
               
@@ -126,7 +148,7 @@ export class ReviewFormComponent implements OnInit {
     
     console.log(this.reviews);
     this.hasError = false;
-   var data = {reviewer:'level1_user',idea_status:mode,reviews:this.reviews,idea_id:this.idea_id}
+   var data = {reviewer:this.reviewer,idea_status:mode,reviews:this.reviews,idea_id:this.idea_id}
     this.adminService.SaveReview(data).subscribe(data => {
       console.log(data);
       if (data.status){

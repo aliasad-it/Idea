@@ -19,7 +19,7 @@
 routerLink="/dashboard"
 class="btn btn-sm btn-light-primary"
 >
--Back
+< Back
 </a>
     </div>
       <!-- begin::Separator  -->
@@ -60,18 +60,15 @@ class="btn btn-sm btn-light-primary"
 <div class="row mb-10">
       <div class="col-md-4">
         <label class="form-label fs-6 fw-bolder text-dark">Category</label>
-        <Select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-          name="categoryname" id="cat_id">
-          <option value="1">Business Process</option>
-          <option value="7">Services</option>
-          <option value="8">Working Environment</option>
-          
-          type="text"
-          name="cat_id"
-          autocomplete="off"
-          [(ngModel)]="cat_id"
-         
-        </Select>
+        <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+             id="cat_id"   
+            name="cat_id"
+            autocomplete="off"
+            [(ngModel)]="cat_id">
+            <option value="1">Business Process</option>
+            <option value="7">Services</option>
+            <option value="8">Working Environment</option>
+          </select>
  
       </div>
 
@@ -79,7 +76,7 @@ class="btn btn-sm btn-light-primary"
       <div class="col-md-4">
         <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
         <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-           name="function_area" id="f_area_id">
+           name="f_area_id" id="f_area_id" [(ngModel)]="f_area_id">
           <option value="1">IT</option>
           <option value="2">Sale</option>
           <option value="3">Shipping</option>
@@ -88,11 +85,8 @@ class="btn btn-sm btn-light-primary"
           <option value="6">Audit</option>
           <option value="7">Admin</option>
           <option value="8">HR</option>
-        <!-- --> 
-        type="text"
-          name="f_area_id"
-          autocomplete="off"
-          [(ngModel)]="f_area_id"
+        
+          
          
         </select> 
  

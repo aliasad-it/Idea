@@ -3,9 +3,30 @@
     }
 .note{
     padding:20px;
-    color:green;
+    color:gray;
     font-weight: bold;
 }    
 button{
     width : 100%
 }
+.New{
+    color:blue;
+    font-weight: bold;
+}
+.Saved{
+    color:greenyellow ;
+    font-weight: bold;  
+}
+.Approved{
+    color:green  ;
+    font-weight: bold;
+}
+.Rejected{
+    color:red ;
+    font-weight: bold;  
+ }
+
+ .present_to{
+    color:orange !important;
+    font-weight: bold; 
+ }

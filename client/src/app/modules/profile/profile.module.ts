@@ -13,6 +13,7 @@ import {
   DropdownMenusModule,
   WidgetsModule,
 } from '../../_metronic/partials';
+import { ChangePassComponent } from './change-pass/change-pass.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {
     CampaignsComponent,
     DocumentsComponent,
     ConnectionsComponent,
+    ChangePassComponent,
   ],
   imports: [
     CommonModule,

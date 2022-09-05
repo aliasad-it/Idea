@@ -1,20 +1,18 @@
-<!-- <p>category-form works!</p> -->
-   
-
+<!-- <p>function-area works!</p> -->
 <div class="card">
     <form
         class="form w-100 category-formCont"
         novalidate="novalidate"
-        id="kt_category_form"
-        #cateForm ="ngForm">
+        id="kt_farea_form"
+        #criteriaForm ="ngForm">
             
         <div class="col-md-2 offset-md-10 mb-10">
-            <!-- <h1 class="text-dark mb-3">Create New Category</h1> -->
-      <a
-routerLink="/category-list"
+            <!-- <h1 class="text-dark mb-3">Create Function Area</h1> -->
+  <a
+routerLink="/criteria-list"
 class="btn btn-sm btn-light-primary"
 >
-< Back
+-Back
 </a>
         </div>
 
@@ -26,35 +24,34 @@ class="btn btn-sm btn-light-primary"
             </div>
           </ng-container>
 
-
           <div class="row mb-10">
+
           <div class="fv-row col-md-2 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">Category ID</label>
+            <label class="form-label fs-6 fw-bolder text-dark">Criteria ID</label>
             <input
               class="border border-primary form-control form-control-lg form-control-solid"
               type="text"
-              name="cat_id"
+              name="criteria_id"
               autocomplete="off"
-              [(ngModel)]="cat_id"
+              [(ngModel)]="criteria_id"
             />
      
           </div>
 
           <div class="fv-row col-md-4 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">Category Name</label>
+            <label class="form-label fs-6 fw-bolder text-dark">Criteria Name</label>
             <input
               class="border border-primary form-control form-control-lg form-control-solid"
               type="text"
-              name="cat_desc"
+              name="criteria_name"
               autocomplete="off"
-              [(ngModel)]="cat_desc"
+              [(ngModel)]="criteria_name"
             />
-     
-          </div>
+     </div>
           </div>
           <div class="fv-row align-items-end">
-            <div class="col-md-2 offset-md-10 text-center">
-            <button (click)="submit(cateForm)"
+          <div class="col-md-2 offset-md-10 text-center">
+            <button (click)="submit(criteriaForm)"
               type="submit" 
               id="kt_sign_in_submit"
               class="btn btn-sm btn-primary w-50 mb-5"

@@ -8,7 +8,10 @@ import { FunctionUpdateComponent } from './function-update/function-update.compo
 import { WorkFlowComponent } from './work-flow/workflow.component';
 import { WorkFlowFormComponent } from './workflow-form/workflow-form.component';
 import { IdeaUpdateComponent } from './idea-update/idea-update.component';
+import { IdeaListComponent } from './idea-list/idea-list.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
+import { CriteriaListComponent } from './criteria-list/criteria-list.component';
+import { CriteriaFormComponent } from './criteria-form/criteria-form.component';
 
 const Routing: Routes = [
   {
@@ -22,7 +25,10 @@ const Routing: Routes = [
   { path: 'category-form', component: CategoryFormComponent},
   { path: 'category-list', component: CategoryListComponent},
   { path: 'category-update', component: CategoryUpdateComponent},
+  { path: 'criteria-list', component: CriteriaListComponent},
+  { path: 'criteria-form', component: CriteriaFormComponent},
   { path: 'idea-update', component: IdeaUpdateComponent},
+  { path: 'idea-list', component: IdeaListComponent},
   { path: 'work-flow', component: WorkFlowComponent},
   { path: 'work-flow-form/:mode', component: WorkFlowFormComponent},
   { path: 'work-flow-form/:mode/:wflowid', component: WorkFlowFormComponent},

@@ -171,20 +171,20 @@ export class DashboardComponent implements OnInit {
     //   }
       this.userdata=localStorage.getItem('user');
       this.userdata=JSON.parse(this.userdata);  
-    
+      // console.log(this.userdata);
       this.ideasService.getIdeaList(this.userdata).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.ideasList = data.data;
-        console.log(this.ideasList);
+        // console.log(this.ideasList);
       });
 
       this.userdata=localStorage.getItem('user');
       this.userdata=JSON.parse(this.userdata);  
     
       this.ideasService.PresentTo(this.userdata).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.PresentTo = data.data;
-        console.log(this.PresentTo);
+        // console.log(this.PresentTo);
       });
     }
 }

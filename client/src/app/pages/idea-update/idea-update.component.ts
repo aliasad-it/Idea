@@ -23,6 +23,7 @@ export class IdeaUpdateComponent implements OnInit {
   description: String;
   attachment: any;
   cat_id: String;
+  cat_desc: String;
   f_area_id: String;
   f_area_desc:any;
   last_update: any;
@@ -38,13 +39,14 @@ export class IdeaUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.userdata=localStorage.getItem('user');
-    this.userdata=JSON.parse(this.userdata);    
+    this.userdata=JSON.parse(this.userdata);  
     this.idea=history.state;
     console.log(this.idea);
     this.idea_id = this.idea.idea_id;
     this.subject = this.idea.subject;
     this.description = this.idea.description;
     this.cat_id = this.idea.cat_id;
+    this.cat_desc = this.idea.cat_desc;
     this.f_area_id = this.idea.f_area_id;
     this.f_area_desc = this.idea.f_area_desc;
     this.last_update= this.idea.last_update;
@@ -54,22 +56,42 @@ export class IdeaUpdateComponent implements OnInit {
     return this.ideaForm.controls;
   }
   submit(form: NgForm) {
+
+    if(form.invalid){
+      this.ErrorMassage = 'Kindly fill all the fields'
+      this.hasError = true;
+      return
+  
+    }
     console.log("Idea is updated", form.value);
     form.value['updateby'] = Number(this.userdata.userid);
+    form.value['last_update'] = new Date(Date.now() );
     console.log(form.value);
     this.hasError = false;
-   
-    this.ideasService.getIdeaUpdate(form.value).subscribe(data => {
-      console.log(data);
+    
+    
+
+    this.idea.subject=this.subject,
+    this.idea.description=this.description,
+    this.idea.cat_id=this.cat_id,
+    this.idea.f_area_id=this.idea.f_area_id,
+    this.idea.update_by=Number(this.userdata.userid),
+    this.idea.last_update=new Date(Date.now() )
+    
+    
+
+
+    this.ideasService.getIdeaUpdate(this.idea).subscribe(data => {
+      console.log(this.idea);
       if (data.status){
-        this.router.navigateByUrl('/dashboard')
+        this.router.navigateByUrl('/idea-list')
        }else {
         this.hasError = true;
-        this.ErrorMassage = 'Failed to submit.';
+        this.ErrorMassage = 'Failed to update idea.';
       }
-      this.ideaForms = data.data;
+      // this.ideaForms = data.data;
      
-      console.log(this.ideaForms);
+      // console.log(this.ideaForms);
     }); 
 }
 }

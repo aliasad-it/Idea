@@ -34,8 +34,7 @@ export class IdeaService {
     console.log("New Idea service ", newidea);
     newidea.last_update = new Date(Date.now() );
     newidea.idea_status = 'New';
-    
-
+    newidea.present_to = '1st Level Reviewer';
     newidea.pic = './assets/media/avatars/300-1.jpg';
  
   

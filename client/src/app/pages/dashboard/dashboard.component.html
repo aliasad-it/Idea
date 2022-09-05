@@ -64,7 +64,7 @@ Add New Idea
             <!-- <td>{{idea.date}}</td> -->
             <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.f_area_desc}}</td>
             <td>
-              <span class="badge badge-light-success">{{idea.idea_status}}</span>
+              <span class="badge badge-light-success" [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
             </td>
             <td class="text-end">
               <!-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -131,13 +131,24 @@ Add New Idea
                
                <ng-container *ngFor='let idea of PresentTo; let idx = index'>
                <tr >
+                <ng-container *ngIf = "
+                ((
+                  (
+                    (idea.idea_status ==='Approved' && idea.present_to =='1st Level Reviewer') || idea.present_to == '2nd Level Reviewer'
+                  ) && idea.level2_user == userdata.userid
+                ) || idea.level1_user == userdata.userid) ||
+                ((
+                  (
+                    (idea.idea_status ==='Approved' && idea.present_to =='2nd Level Reviewer') || idea.present_to == '3rd Level Reviewer'
+                  ) && idea.level3_user == userdata.userid
+                ) || (idea.present_to =='2nd Level Reviewer' && idea.level2_user == userdata.userid))  ">
                  <td> {{idx + 1}} </td>
-                 <td><a href="/review-form/{{idea.idea_id}}">{{idea.subject}}</a></td>
+                 <td><a routerLink="/review-form/{{idea.idea_id}}">{{idea.subject}}</a></td>
                  <!-- <td>{{idea.description}}</td> -->
                  <!-- <td>{{idea.date}}</td> -->
                  <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.f_area_desc}}</td>
                  <td>
-                   <span class="badge badge-light-success">{{idea.idea_status}}</span>
+                   <span class="badge badge-light-success" [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
                  </td>
                  <td class="text-end">
                    <!-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -150,6 +161,7 @@ Add New Idea
                      <span class="svg-icon svg-icon-3"></span>
                    </a> -->
                  </td>
+                 </ng-container>
                </tr>
              </ng-container>
            

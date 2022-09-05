@@ -43,6 +43,21 @@ export class AdminService {
     return this.http.post(GLOBAL.serviceUrl + '/admin/addFarea', addfarea);
   }
 
+  getAddCriteria(addcriteria: any): Observable<any> {
+
+    addcriteria.roles = [4]; // Manager
+    console.log("Add Farea service ", addcriteria);
+    addcriteria.last_update = new Date(Date.now() );
+    
+    
+
+    addcriteria.pic = './assets/media/avatars/300-1.jpg';
+ 
+  
+  
+    return this.http.post(GLOBAL.serviceUrl + '/admin/addCriteria', addcriteria);
+  }
+
   getCategoryList(userdata: any): Observable<any> {
     console.log("Category list service ", userdata);
     
@@ -53,6 +68,18 @@ export class AdminService {
     
     return this.http.post(GLOBAL.serviceUrl + '/admin/getCategoryUpdate' , userdata );
   }
+
+  getCriteriaList(userdata: any): Observable<any> {
+    console.log("Criteria list service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getCriteriaList' , userdata );
+  }
+  getCriteriaUpdate(userdata: any): Observable<any> {
+    console.log("Criteria update service ", userdata);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/admin/getCriteriaUpdate' , userdata );
+  }
+
   getFunctionList(userdata: any): Observable<any> {
     console.log("Function list service ", userdata);
     
@@ -86,7 +113,7 @@ export class AdminService {
     return this.http.get(GLOBAL.serviceUrl + '/admin/getReviewList/' + idea_id+'/'+userid );
   }
   SaveReview(reviews:any): Observable<any> {
-    console.log();
+    console.log(reviews);
    
    
     return this.http.post(GLOBAL.serviceUrl + '/admin/SaveReview',  reviews );

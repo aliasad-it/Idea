@@ -24,6 +24,8 @@ import { IdeaUpdateComponent } from './pages/idea-update/idea-update.component';
 import { WorkFlowComponent } from './pages/work-flow/workflow.component';
 import { WorkFlowFormComponent } from './pages/workflow-form/workflow-form.component';
 import { ReviewFormComponent } from './pages/review-form/review-form.component';
+import { CriteriaListComponent } from './pages/criteria-list/criteria-list.component';
+import { CriteriaFormComponent } from './pages/criteria-form/criteria-form.component';
 // import { IdeaFormModule } from './pages/idea-form/idea-form.module';
 // import { IdeaListModule } from './pages/idea-list/idea-list.module';
 // #fake-end#
@@ -48,7 +50,9 @@ function appInitializer(authService: AuthService) {
     IdeaUpdateComponent,
     WorkFlowComponent,
     WorkFlowFormComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
+    CriteriaListComponent,
+    CriteriaFormComponent
   ],
   imports: [
     BrowserModule,
