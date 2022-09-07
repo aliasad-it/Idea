@@ -29,6 +29,6 @@ export class CriteriaListComponent implements OnInit {
   });
   }
   criteriaUpdate(farea:any){
-    this.router.navigateByUrl('/criteria-update', { state: farea })
+    this.router.navigateByUrl('/criteria-form', { state: farea })
   }
 }

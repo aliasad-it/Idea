@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { OverviewComponent } from './overview/overview.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -15,6 +16,7 @@ import {
 } from '../../_metronic/partials';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 
+
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -27,11 +29,14 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ProfileRoutingModule,
     InlineSVGModule,
     DropdownMenusModule,
     WidgetsModule,
     CardsModule,
+    
   ],
 })
 export class ProfileModule {}

@@ -38,6 +38,12 @@ export class AuthenticationService {
     return this.http.post(GLOBAL.serviceUrl + '/user/authentication' , user1 );
   }
 
+  getProfile(userid: string): Observable<any> {
+  
+    console.log("Authentication service ", userid);
+    return this.http.post(GLOBAL.serviceUrl + '/user/profile' , {userid:userid} );
+  }
+
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager
     user.authToken = 'auth-token-' + Math.random();

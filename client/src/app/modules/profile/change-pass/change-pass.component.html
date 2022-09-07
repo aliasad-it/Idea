@@ -5,14 +5,18 @@
         novalidate="novalidate"
         id="kt_change_form"
         #changeForm ="ngForm">
-            
+        <h3 class="card-title align-items-start flex-column">
+          <span class="card-label fw-bolder fs-3 mb-1 pt-5">Change Password</span>
+          <span class="text-muted mt-1 fw-bold fs-7"></span>
+        </h3>
         <div class="col-md-2 offset-md-10 mb-10">
-            <!-- <h1 class="text-dark mb-3">Create Function Area</h1> -->
+          
+            
   <a
 routerLink="/profile"
 class="btn btn-sm btn-light-primary"
 >
- < Back
+< Back
 </a>
         </div>
 
@@ -26,7 +30,7 @@ class="btn btn-sm btn-light-primary"
 
           <div class="row mb-10">
 
-          <div class="fv-row col-md-2 mb-10">
+          <div class="fv-row col-md-4 mb-10">
             <label class="form-label fs-6 fw-bolder text-dark">Old Password</label>
             <input
               class="border border-primary form-control form-control-lg form-control-solid"
@@ -66,7 +70,7 @@ class="btn btn-sm btn-light-primary"
             <button (click)="submit(changeForm)"
               type="submit" 
               id="kt_sign_in_submit"
-              class="btn btn-sm btn-primary w-50 mb-5"
+              class="btn btn-sm btn-primary w-55 mb-5"
             >Submit
              
             </button>

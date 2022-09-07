@@ -6,6 +6,8 @@ import { DocumentsComponent } from './documents/documents.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProfileComponent } from './profile.component';
 import { ConnectionsComponent } from './connections/connections.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
+
 
 const routes: Routes = [
   {
@@ -29,8 +31,9 @@ const routes: Routes = [
         component: DocumentsComponent,
       },
       {
-        path: 'connections',
-        component: ConnectionsComponent,
+        
+        path: 'change-password',
+        component: ChangePassComponent
       },
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' },
