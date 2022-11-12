@@ -55,11 +55,11 @@ export class AuthService implements OnDestroy {
       map((user: UserType) => {
         
         if (user) {
-          console.log(user);
           localStorage.setItem('user', JSON.stringify(user));
           const auth = new AuthModel();
             auth.authToken = user.authToken;
             auth.refreshToken = user.refreshToken;
+            // auth.roleid = '3';
             auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);       
             const result = this.setAuthFromLocalStorage(auth);
       
@@ -121,18 +121,22 @@ const user=localStorage.getItem('user');
   registration(user: UserModel): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.authenticationService.createUser(user).pipe(
-      map(() => {
-        this.isLoadingSubject.next(false);
-      }),
-      switchMap(() => this.login(user.email, user.password)),
-      catchError((err) => {
-        console.error('err', err);
-        return of(undefined);
-      }),
-      finalize(() => this.isLoadingSubject.next(false))
-    );
-  }
-  // registration(user: UserModel): Observable<any> {
+
+    //   map(() => {
+    //     this.isLoadingSubject.next(false);
+    //   }),
+    //  // switchMap(() => this.login(user.email, user.password)),
+    //   catchError((err) => {
+    //     console.error('err', err);
+    //     return of(undefined);
+    //   }),
+    //   finalize(() => this.isLoadingSubject.next(false))
+     );
+    }
+
+    
+
+    // registration(user: UserModel): Observable<any> {
   //   this.isLoadingSubject.next(true);
   //   return this.authHttpService.createUser(user).pipe(
   //     map(() => {

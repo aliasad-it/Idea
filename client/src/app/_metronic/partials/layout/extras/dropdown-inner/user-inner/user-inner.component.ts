@@ -15,6 +15,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   language: LanguageFlag;
   user$: Observable<UserType>;
   langs = languages;
+  userdata:any;
   private unsubscribe: Subscription[] = [];
 
   constructor(
@@ -24,6 +25,8 @@ export class UserInnerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.user$ = this.auth.currentUserSubject.asObservable();
+    this.userdata=localStorage.getItem('user');
+    this.userdata=JSON.parse(this.userdata);  
     this.setLanguage(this.translationService.getSelectedLanguage());
   }
 

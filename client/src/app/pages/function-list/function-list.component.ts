@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm,FormGroup, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -17,16 +17,15 @@ export class FunctionListComponent implements OnInit {
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    public adminService: AdminService
+    public adminService: AdminService,
+    private cd:ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     
     this.adminService.getFunctionList(this.userdata).subscribe(data => {
-      console.log(data);
       this.functionList = data.data;
-     
-      console.log(this.functionList);
+      this.cd.detectChanges();
   });
   }
   fareaUpdate(farea:any){

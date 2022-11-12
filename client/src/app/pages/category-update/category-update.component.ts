@@ -36,7 +36,6 @@ export class CategoryUpdateComponent implements OnInit {
     this.userdata=JSON.parse(this.userdata); 
     // this.category=this.router.getCurrentNavigation().extras.state
     this.category=history.state;
-    console.log(this.category);
     this.cat_id = this.category.cat_id;
     this.cat_desc = this.category.cat_desc;
   }
@@ -51,11 +50,9 @@ submit(form: NgForm) {
     return
 
   }
-    console.log("cate is new", form.value);
     form.value['update_by'] = Number(this.userdata.userid);
     form.value['last_update'] = new Date(Date.now() );
 
-    console.log(form.value);
     let data={
       cat_id:this.category.cat_id,
       cat_desc:this.cat_desc,
@@ -63,11 +60,9 @@ submit(form: NgForm) {
       last_update:new Date(Date.now() )
     
     }
-    console.log(data)
     this.hasError = false;
    
     this.adminService.getCategoryUpdate(data).subscribe(data => {
-      console.log(data);
      if (data.status){
       this.router.navigateByUrl('/category-list')
      }else {

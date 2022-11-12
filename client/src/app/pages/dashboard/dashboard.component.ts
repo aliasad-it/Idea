@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
+// import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../modalbox/modalbox.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -124,73 +128,53 @@ export class DashboardComponent implements OnInit {
     ideasList:any;
     PresentTo:any;
     userdata: any;
-    constructor(public ideasService: IdeaService , public router:Router) {
+    modalRef: MdbModalRef<ModalComponent> | null = null;
+    hasError:boolean;
+
+  constructor(public ideasService: IdeaService ,
+    private cd: ChangeDetectorRef, private modalService: MdbModalService,
+    public router:Router) {
       
     }
   
     ngOnInit(): void {
-  //    this.ideasList=[
-  //     {
-  //         "subject": "Idea portal",
-  //         "description": "Should have a idea portal in which user can share there thoughts aand new ideas related to the problems they are facing",
-  //         "presentedBy": "Ali Asad",
-  //         "date": "8 July 2022",
-  //         "status": "Under Review",
-  //         "department": "IT"
-  //     },
-  //     {
-  //         "subject": "Idea portal",
-  //         "desrciption": "Should have a idea portal in which user can share there thoughts aand new ideas related to the problems they are facing",
-  //         "presentedBy": "Ali Asad",
-  //         "date": "8 July 2022",
-  //         "status": "Under Review",
-  //         "department": "IT"
-  //     }
-  // ]
-    //   this.ideasService.getIdeaList(this.user).subscribe(data => {
-    //     console.log(data);
-    //     this.ideasList = data.data;
-    //     console.log(this.ideasList);
-    //   });
-     
-    // }
-    // departments=[
-    //   { svgIcon:"./assets/media/icons/duotune/general/gen032.svg",
-    //   class:"card bg-danger hoverable card-xl-stretch mb-xl-8",
-    //   color:"Danger",
-    //   iconColor:"primary",
-    //   title:"IT",
-    //   description:"Information Technology"}]
-
-    //   ideaForm(){
-   
-    //     console.log('dep');
-    //     // this.router.navigateByUrl('/idea-form');
-    //     // this.router.navigateByUrl('/idea/form', { state: dep })
-    
-    //   }
+ 
       this.userdata=localStorage.getItem('user');
       this.userdata=JSON.parse(this.userdata);  
-      // console.log(this.userdata);
       this.ideasService.getIdeaList(this.userdata).subscribe(data => {
-        // console.log(data);
         this.ideasList = data.data;
-        // console.log(this.ideasList);
+        this.cd.detectChanges();
       });
 
       this.userdata=localStorage.getItem('user');
-      this.userdata=JSON.parse(this.userdata);  
-    
-      this.ideasService.PresentTo(this.userdata).subscribe(data => {
-        // console.log(data);
-        this.PresentTo = data.data;
-        // console.log(this.PresentTo);
-      });
-    }
-}
-  // constructor(public router:Router) {}
+      
 
-  // ngOnInit(): void {}
+      this.userdata=JSON.parse(this.userdata);  
+      this.ideasService.PresentTo(this.userdata).subscribe(data => {
+        this.PresentTo = data.data;
+        this.cd.detectChanges();
+      });
+      
+    }
+
+
+    ideaUpdate(idea:any){
+      if( idea.idea_status=='New'){
+       this.router.navigateByUrl('/idea-update', { state: idea })
+      }
+      else{
+       this.hasError= true;
+      }
+     }
+    openModal(idea:any) {
+      this.modalRef = this.modalService.open(ModalComponent, {
+        data: {idea:idea},
+        modalClass: 'modal-lg'
+      })
+    }
+
+}
+
 
   
 

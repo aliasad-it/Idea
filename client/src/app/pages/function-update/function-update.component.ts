@@ -36,7 +36,6 @@ export class FunctionUpdateComponent implements OnInit {
     this.userdata=JSON.parse(this.userdata); 
     // this.category=this.router.getCurrentNavigation().extras.state
     this.farea=history.state;
-    console.log(this.farea);
     this.f_area_id = this.farea.f_area_id;
     this.f_area_desc = this.farea.f_area_desc;
   }
@@ -51,11 +50,9 @@ export class FunctionUpdateComponent implements OnInit {
       return
   
     }
-      console.log("farea is updated", form.value);
       form.value['update_by'] = Number(this.userdata.userid);
       form.value['last_update'] = new Date(Date.now() );
   
-      console.log(form.value);
       let data={
         f_area_id:this.farea.f_area_id,
         f_area_desc:this.f_area_desc,
@@ -63,11 +60,9 @@ export class FunctionUpdateComponent implements OnInit {
         last_update:new Date(Date.now() )
       
       }
-      console.log(data)
       this.hasError = false;
      
       this.adminService.getFareaUpdate(data).subscribe(data => {
-        console.log(data);
        if (data.status){
         this.router.navigateByUrl('/function-list')
        }else {

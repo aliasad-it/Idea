@@ -22,10 +22,8 @@ export class CriteriaListComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminService.getCriteriaList(this.userdata).subscribe(data => {
-      console.log(data);
       this.criteriaList = data.data;
      
-      console.log(this.criteriaList);
   });
   }
   criteriaUpdate(farea:any){

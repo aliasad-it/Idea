@@ -15,6 +15,7 @@ import {
   WidgetsModule,
 } from '../../_metronic/partials';
 import { ChangePassComponent } from './change-pass/change-pass.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
     DocumentsComponent,
     ConnectionsComponent,
     ChangePassComponent,
+    EditProfileComponent,
   ],
   imports: [
     CommonModule,

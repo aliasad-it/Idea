@@ -32,11 +32,9 @@ export class CategoryFormComponent implements OnInit {
  
 
   ngOnInit(): void {
-    console.log('category page');
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata); 
     // this.category= history.state;
-    // console.log(history.state);
   }
 
   get f() {
@@ -44,17 +42,14 @@ export class CategoryFormComponent implements OnInit {
   }
 
 submit(form: NgForm) {
-    console.log("cate is new", form.value);
     form.value['update_by'] = Number(this.userdata.userid);
-    console.log(form.value);
     this.hasError = false;
    
     this.adminService.getAddCat(form.value).subscribe(data => {
-      console.log(data);
       this.cateForms = data.data;
      
-      console.log(this.cateForms);
     }); 
+    this.router.navigateByUrl("/category-list")
       
    
     

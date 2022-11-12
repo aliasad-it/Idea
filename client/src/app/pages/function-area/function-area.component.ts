@@ -31,7 +31,6 @@ export class FunctionAreaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('farea page');
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata); 
   }
@@ -39,17 +38,15 @@ export class FunctionAreaComponent implements OnInit {
     return this.fareaForm.controls;
   }
   submit(form: NgForm) {
-    console.log("farea is new", form.value);
     form.value['update_by'] = Number(this.userdata.userid);
-    console.log(form.value);
     this.hasError = false;
    
     this.adminService.getAddFarea(form.value).subscribe(data => {
-      console.log(data);
       this.fareaForms = data.data;
      
-      console.log(this.fareaForms);
     }); 
+    this.router.navigateByUrl("/function-list")
+
 
 }
 ngOnDestroy() {

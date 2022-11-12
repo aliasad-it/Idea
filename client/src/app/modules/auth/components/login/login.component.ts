@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   user:any;
   // KeenThemes mock, change it to:
   defaultAuth: any = {
-    email: 'ali.asad@nbcpepsi.com',
-    password: '123',
+    // email: 'ali.asad@nbcpepsi.com',
+    // password: '123',
   };
   loginForm: FormGroup;
   hasError: boolean;
@@ -81,14 +81,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
 //     let user1={email:this.f.email.value , password:this.f.password.value}
 //     this.authenticationService.getAuthentication(user1).subscribe(data => {
-//       console.log(data);
 //       this.user=data.data;
       
 //       // this.user = data.data;
-//       // console.log(this.ideasList);
 //     })
 //      if(this.user) {
-//       console.log('success', this.user);
 //       this.router.navigate(['/dash']);
 //    } else {
 //     this.hasError = true;

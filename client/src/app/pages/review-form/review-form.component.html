@@ -1,249 +1,215 @@
 <!-- <p>review-form works!</p> -->
 
 
-    
+
 
 <div class="card">
-    <form
-    class="form w-100 reviewformCont"
-      novalidate="novalidate"
-      id="kt_review_form"
-      #reviewForm ="ngForm">
-      <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1 pt-5">Review Idea</span>
-        <span class="text-muted mt-1 fw-bold fs-7"></span>
-      </h3>  
-<div class="row"> 
-  <div class="col-md-2 offset-md-10 text-center">
- 
-   
- 
-    <!-- <button
-          type="button"
-          id="kt_sign_in_back"
-    
-          class="btn btn-lg btn-gray w-100 mb-5"
-        >Back
-         
-        </button> -->
-        <a
-  routerLink="/dashboard"
-  class="btn btn-sm btn-light-primary"
-  >
-  < Back
-  </a>
+  <form class="form w-100 reviewformCont" novalidate="novalidate" id="kt_review_form" #reviewForm="ngForm">
+    <div class="row mb-2">
+      <div class="col-md-10 col-sm-10 ul mt-2">
+        <h3>Review Idea</h3>
       </div>
-        <!-- begin::Separator  -->
+      <div class="col-md-2 col-sm-2">
+        <a onclick="history.back()" class="btn btn-sm btn-light-primary float-end">
+          < Back </a>
       </div>
-  
-  
-      
-          
-        <!--end::Heading-->
-      
-        <!-- begin::Alert info-->
-      
-        <!-- end::Alert info-->
-      
-        <!-- begin::Alert error-->
-        <ng-container *ngIf="hasError">
-          <div class="mb-lg-15 alert alert-danger">
-            <div class="alert-text font-weight-bold">
-              Kindly fill all the fields
-            </div>
-          </div>
-        </ng-container>
-        <!-- end::Alert error-->
-      
-        <!--begin::Form group-->
-        <div class="row mb-10">
+    </div>
 
-        <div class="fv-row col-md-4 mb-10">
-          <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
-         <p> {{subject}} </p>
-   
+    <!--end::Heading-->
+
+    <!-- begin::Alert info-->
+
+    <!-- end::Alert info-->
+
+    <!-- begin::Alert error-->
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">
+          Kindly fill all the fields
         </div>
-  
-        <div class="col-md-3">
-          <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
+      </div>
+    </ng-container>
+    <!-- end::Alert error-->
+
+    <!--begin::Form group-->
+    <div class="row mb-10">
+
+      <div class="fv-row col-md-4 mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
+        <p> {{subject}} </p>
+
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
         <p> {{f_area_desc}}</p>
-   
-        </div>            
-  
-        <div class="col-md-3">
-            <!-- <div class="d-flex justify-content-between mt-n5"> -->
-              <!-- <div class="d-flex flex-stack mb-2"> -->
-                <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
-               
-              <!-- </div> -->
-            <!-- </div> -->
-        
-            <button disabled
-              type="submit"
-              id="kt_sign_in_submit"
-        
-              class="btn col-md-1 btn-sm btn-primary w-55 mb-5"
-            >View Attachment
-              
-            </button>
-     
-          </div>
-  
-          <div class="fv-row mb-10">
-            <div class="d-flex justify-content-between mt-n5">
-              <div class="d-flex flex-stack mb-2">
-                <label class="form-label fw-bolder text-dark fs-6 mb-0">Description</label>
-               
-              </div>
-            </div>
-        
-            <p>{{description}}</p>
-     
-          </div>
-          </div>
 
-          <div class="row">
-        <div class="col-md-3">
-          <label class="form-label fs-6 fw-bolder text-dark">Reviewer</label>
-         <p class="present_to">{{present_to}}</p>
-   
-        </div>
-  
-  
-        <div class="col-md-3">
-          <label class="form-label fs-6 fw-bolder text-dark">Review Status</label>
-          <p [ngClass]="idea_status">{{idea_status}}</p>
-           
-        
-   
-        </div>
-          
-            
-
-  
       </div>
+
+      <div class="col-md-3">
+        <!-- <div class="d-flex justify-content-between mt-n5"> -->
+        <!-- <div class="d-flex flex-stack mb-2"> -->
+        <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
+
+        <!-- </div> -->
+        <!-- </div> -->
+
+        <button disabled type="submit" id="kt_sign_in_submit" class="btn col-md-1 btn-sm btn-primary w-55 mb-5">View
+          Attachment
+
+        </button>
+
+      </div>
+
+      <div class="fv-row mb-10">
+        <div class="d-flex justify-content-between mt-n5">
+          <div class="d-flex flex-stack mb-2">
+            <label class="form-label fw-bolder text-dark fs-6 mb-0">Description</label>
+
+          </div>
+        </div>
+
+        <p>{{description}}</p>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <label class="form-label fs-6 fw-bolder text-dark">Reviewer</label>
+        <p class="present_to">{{present_to}}</p>
+
+      </div>
+
+
+      <div class="col-md-3">
+        <label class="form-label fs-6 fw-bolder text-dark">Review Status</label>
+        <p [ngClass]="idea_status">{{idea_status}}</p>
+
+
+
+      </div>
+
+
+
+
+    </div>
     <div class="note"> Note: The rater will select A, B or C for each “success criteria” (A=1, B=5, C=9)</div>.
-      <div class="card-body py-3">
-        <!-- begin::Table container -->
-        <div class="table-responsive">
-          <!-- begin::Table -->
-          <table
-            class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-3"
-          >
-            <!-- begin::Table head -->
-            <thead>
-              <tr class="fw-bolder text-muted">
-                <th>SN</th>
-                <th class="min-w-150px">Criteria</th>
-                <th class="min-w-140px">Score</th>
-                <th class="min-w-120px">Comments</th>
-                
-              </tr>
-            </thead>
-            <!-- end::Table head -->
-            <!-- begin::Table body -->
-            <tbody > 
-              
-              <ng-container *ngFor='let review of reviews; let idx = index'>
-              <tr >
+    <div class="card-body py-3">
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <!-- begin::Table -->
+        <table class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-3">
+          <!-- begin::Table head -->
+          <thead>
+            <tr class="fw-bolder text-muted">
+              <th>SN</th>
+              <th class="min-w-150px">Criteria</th>
+              <th class="min-w-140px">Score</th>
+              <th class="min-w-120px">Comments</th>
+
+            </tr>
+          </thead>
+          <!-- end::Table head -->
+          <!-- begin::Table body -->
+          <tbody>
+
+            <ng-container *ngFor='let review of reviews; let idx = index'>
+              <tr>
                 <td> {{idx + 1}} </td>
                 <td>{{review.criteria_name}}</td>
-                <td> <select class="form-select form-select-solid form-control form-control-sm form-control-solid"
+                <!-- <td> <select class="form-select form-select-solid form-control form-control-sm form-control-solid"
                   name="score{{idx}}" id="score_id" [(ngModel)]="review.score">
                  <option value='1'>A</option>
                  <option value='5'>B</option>
                  <option value='9'>C</option>
-                
-            
-                 
-                
-               </select> </td>
-                <td>
-                  <input
-              class="border border-primary form-control form-control-sm form-control-solid description"
-              type="text"
-              name="comment{{idx}}"
-              autocomplete="off"
-              [(ngModel)]="review.comment"
-            />
+               </select> </td> -->
+
+
+
+
+                <td class="col-4">
+                  <input type="radio" name="score{{idx}}" [(ngModel)]="review.score" value="1" class="form-check-input"
+                    id="score_id" title="A = {{review.criteria_A}}">
+                  <label class="form-check-label col-1" title="A = {{review.criteria_A}}">
+                    <pre> A</pre>
+                  </label>
+                  <input type="radio" name="score{{idx}}" [(ngModel)]="review.score" value="5" class="form-check-input"
+                    id="score_id" title="B = {{review.criteria_B}}">
+                  <label class="form-check-label col-1" title="B = {{review.criteria_B}}">
+                    <pre> B</pre>
+                  </label>
+                  <input type="radio" name="score{{idx}}" [(ngModel)]="review.score" value="9" class="form-check-input"
+                    id="score_id" title="C = {{review.criteria_C}}">
+                  <label class="form-check-label col-1" title="C = {{review.criteria_C}}">
+                    <pre> C</pre>
+                  </label>
                 </td>
-                
-                
-                
+
+
+
+                <td>
+                  <input class="border border-primary form-control form-control-sm form-control-solid description"
+                    type="text" name="comment{{idx}}" autocomplete="off" [(ngModel)]="review.comment" />
+                </td>
+
+
+
               </tr>
             </ng-container>
-           
-            </tbody>
-            <!-- end::Table body -->
-          </table>
-          <!-- end::Table -->
-        </div>
-        <!-- end::Table container -->
+
+          </tbody>
+          <!-- end::Table body -->
+        </table>
+        <!-- end::Table -->
       </div>
-        <!--end::Form group-->
-      
-        <!--begin::Form group-->
-        
-  
-        
-        <!--end::Form group-->
-  
-        <!--begin::Action-->
-        <div class="row">
-        <div class="col-md-2 offset-md-6 text-center"> 
-            
-          <button (click)="submit(reviewForm,'Saved')"
-            type="submit"
-            id="kt_sign_in_submit"
-      
-            class="btn btn-sm btn-primary w-55 mb-5"
-          >Save
-           
-          </button>
-        </div>
+      <!-- end::Table container -->
+    </div>
+    <!--end::Form group-->
 
-    <!-- </div> -->
+    <!--begin::Form group-->
 
-    <!-- <div class="row align-items-end"> -->
-        <div class="col-md-2 text-center">
-          <button (click)="submit(reviewForm,'Approved')"
-            type="submit"
-            id="kt_sign_in_submit"
-      
-            class="btn btn-sm btn-success w-55 mb-5"
-          >Approve & Save
-           
-          </button>
-        </div>
-        
-    <!-- </div> -->
 
-    <!-- <div class="row align-items-end"> -->
-        <div class="col-md-2 text-center">
-          <button (click)="submit(reviewForm,'Rejected')"
-            type="submit"
-            id="kt_sign_in_submit"
-      
-            class="btn btn-sm btn-danger w-55 mb-5"
-          >Reject & Save
-           
-          </button>
-        </div>
-        
-    <!-- </div> -->
-          <!-- begin::Separator  -->
-        </div>
-        <!--end::Action-->
-    </form>
-      <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation"
-  >
-    <ng-container
-      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-    >
+
+    <!--end::Form group-->
+
+    <!--begin::Action-->
+    <div class="row">
+      <div class="col-md-2 offset-md-6 text-center">
+
+        <button (click)="submit(reviewForm,'Saved')" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-primary w-55 mb-5">Save
+
+        </button>
+      </div>
+
+      <!-- </div> -->
+
+      <!-- <div class="row align-items-end"> -->
+      <div class="col-md-2 text-center">
+        <button (click)="submit(reviewForm,'Approved')" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-success w-55 mb-5">Approve & Save
+
+        </button>
+      </div>
+
+      <!-- </div> -->
+
+      <!-- <div class="row align-items-end"> -->
+      <div class="col-md-2 text-center">
+        <button (click)="submit(reviewForm,'Rejected')" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-danger w-55 mb-5">Reject & Save
+
+        </button>
+      </div>
+
+      <!-- </div> -->
+      <!-- begin::Separator  -->
+    </div>
+    <!--end::Action-->
+  </form>
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
       <div class="fv-plugins-message-container">
         <span role="alert">
           {{ message }}
@@ -251,5 +217,5 @@
       </div>
     </ng-container>
   </ng-template>
-  
-  </div>
+
+</div>

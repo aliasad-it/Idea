@@ -1,171 +1,138 @@
 <!-- <p>idea-update works!</p> -->
 <div class="card">
-    <form
-    class="form w-100 ideaformCont"
-      novalidate="novalidate"
-      id="kt_idea_form"
-      #categoryForm ="ngForm">
-  
-    <div class="row"> 
-      <div class="col-md-2 offset-md-10 text-center">
-        <!-- <button
-          type="button"
-          id="kt_sign_in_back"
-    
-          class="btn btn-lg btn-gray w-100 mb-5"
-        >Back
-         
-        </button> -->
-        <a
-  routerLink="/idea-list"
-  class="btn btn-sm btn-light-primary"
-  >
-  < Back
-  </a>
-      </div>
-        <!-- begin::Separator  -->
-      </div>
-  
-  
-      
-          
-        <!--end::Heading-->
-      
-        <!-- begin::Alert info-->
-      
-        <!-- end::Alert info-->
-      
-        <!-- begin::Alert error-->
-        <ng-container *ngIf="hasError">
-          <div class="mb-lg-15 alert alert-danger">
-            <div class="alert-text font-weight-bold">
-              Kindly fill all the fields
-            </div>
-          </div>
-        </ng-container>
-        <!-- end::Alert error-->
-      
-        <!--begin::Form group-->
-        <div class="row mb-10">
+  <form class="form w-100 ideaformCont" novalidate="novalidate" id="kt_idea_form" #categoryForm="ngForm">
 
-        <div class="fv-row col-md-3 mb-10">
-          <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
-          <input
-            class="border border-primary form-control form-control-lg form-control-solid"
-            type="text"
-            name="subject"
-            autocomplete="off"
-           [(ngModel)]="subject"
-          />
-   
+
+    <div class="row mb-2">
+      <div class="col-md-9 col-sm-9 ul mt-2">
+        <h3>Update Idea</h3>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a onclick="history.back()" class="btn btn-sm btn-light-primary float-end">
+          < Back </a>
+      </div>
+    </div>
+    <!-- begin::Separator  -->
+
+
+
+
+
+    <!--end::Heading-->
+
+    <!-- begin::Alert info-->
+
+    <!-- end::Alert info-->
+
+    <!-- begin::Alert error-->
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">
+          Kindly fill all the fields
         </div>
-  
-  
-        <div class="col-md-3">
-          <label class="form-label fs-6 fw-bolder text-dark">Category</label>
-          <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-          id="cat_id"   
-         name="cat_id"
-         autocomplete="off"
-         [(ngModel)]="cat_id">
-         <option value="1">Business Process</option>
-         <option value="7">Services</option>
-         <option value="8">Working Environment</option>
-       </select>
-   
-        </div>
-  
-  
-        <div class="col-md-3">
-          <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
-          <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-           name="f_area_id" id="f_area_id" [(ngModel)]="f_area_id">
-          <option value="1">IT</option>
+      </div>
+    </ng-container>
+    <!-- end::Alert error-->
+
+    <!--begin::Form group-->
+
+    <div class="fv-row col-md-8 mb-5">
+      <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
+      <input class="border border-primary form-control form-control-lg form-control-solid" type="text" name="subject"
+        autocomplete="off" [(ngModel)]="subject" />
+
+    </div>
+
+
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Category</label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          id="cat_id" name="cat_id" autocomplete="off" [(ngModel)]="cat_id">
+          <!-- <option value="1">Business Process</option>
+          <option value="7">Services</option>
+          <option value="8">Working Environment</option> -->
+          <ng-container *ngIf="cate.length>0">
+            <option *ngFor="let cat of cate" [value]="cat.cat_id">{{cat.cat_desc}}</option>
+          </ng-container>
+        </select>
+
+      </div>
+
+
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          name="f_area_id" id="f_area_id" [(ngModel)]="f_area_id">
+          <!-- <option value="1">IT</option>
           <option value="2">Sale</option>
           <option value="3">Shipping</option>
           <option value="4">Prodution</option>
           <option value="5">Accounts</option>
           <option value="6">Audit</option>
           <option value="7">Admin</option>
-          <option value="8">HR</option>
-        
-          
-         
-        </select> 
-   
-        </div>
-          
-            
-            
-  
-        <div class="col-md-3">
-          <!-- <div class="d-flex justify-content-between mt-n5"> -->
-            <!-- <div class="d-flex flex-stack mb-2"> -->
-              <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
-             
-            <!-- </div> -->
-          <!-- </div> -->
-      
-          <input
-            class="border border-primary form-control form-control-lg form-control-solid attachment"
-            type="file"
-            name="attachment"
-            autocomplete="off"
-            [(ngModel)]="attachment"
-          />
-   
-        </div>
-  
+          <option value="8">HR</option> -->
+
+          <ng-container *ngIf="farea.length>0">
+            <option *ngFor="let area of farea" [value]="area.f_area_id">{{area.f_area_desc}}</option>
+          </ng-container>
+
+        </select>
+
       </div>
-        <!--end::Form group-->
-      
-        <!--begin::Form group-->
-        <div class="fv-row mb-10">
-          <div class="d-flex justify-content-between mt-n5">
-            <div class="d-flex flex-stack mb-2">
-              <label class="form-label fw-bolder text-dark fs-6 mb-0">Description</label>
-             
-            </div>
-          </div>
-      
-          <textarea
-            class="border border-primary form-control form-control-lg form-control-solid description"
-            type="text"
-            name="description"
-            autocomplete="off"
-            [(ngModel)]="description"
-          ></textarea>
-   
+
+
+
+
+      <div class="col-md-4">
+        <!-- <div class="d-flex justify-content-between mt-n5"> -->
+        <!-- <div class="d-flex flex-stack mb-2"> -->
+        <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
+
+        <!-- </div> -->
+        <!-- </div> -->
+
+        <input class="border border-primary form-control form-control-lg form-control-solid attachment" type="file"
+          name="attachment" autocomplete="off" [(ngModel)]="attachment" />
+
+      </div>
+
+    </div>
+    <!--end::Form group-->
+
+    <!--begin::Form group-->
+    <div class="fv-row mb-5">
+      <div class="d-flex justify-content-between mt-n5">
+        <div class="d-flex flex-stack mb-2">
+          <label class="form-label fw-bolder text-dark fs-6 mb-0">Description</label>
+
         </div>
-  
-        
-        <!--end::Form group-->
-      
-        <!--begin::Action-->
-        <div class="row align-items-end">
-        <div class="col-md-2 offset-md-10 text-center">
-          <button (click)="submit(categoryForm)"
-            type="submit"
-            id="kt_sign_in_submit"
-      
-            class="btn btn-sm btn-danger w-55 mb-5"
-          >Update
-           
-          </button>
-        </div>
-          <!-- begin::Separator  -->
-        </div>
-        <!--end::Action-->
-      </form>
-      <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation"
-  >
-    <ng-container
-      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-    >
+      </div>
+
+      <textarea class="border border-primary form-control form-control-lg form-control-solid description" type="text"
+        name="description" autocomplete="off" [(ngModel)]="description"></textarea>
+
+    </div>
+
+
+    <!--end::Form group-->
+
+    <!--begin::Action-->
+    <div class="row align-items-end">
+      <div class="col-md-2 offset-md-10 text-center">
+        <button (click)="submit(categoryForm)" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-primary w-55 mb-5">Update
+
+        </button>
+      </div>
+      <!-- begin::Separator  -->
+    </div>
+    <!--end::Action-->
+  </form>
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
       <div class="fv-plugins-message-container">
         <span role="alert">
           {{ message }}
@@ -173,5 +140,5 @@
       </div>
     </ng-container>
   </ng-template>
-  
-  </div>
+
+</div>

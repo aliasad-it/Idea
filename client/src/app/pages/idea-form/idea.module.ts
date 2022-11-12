@@ -7,8 +7,9 @@ import { IdeaRoutingModule } from './idea-routing.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { IdeaListComponent } from '../idea-list/idea-list.component';
+import { ModalComponent } from '../modalbox/modalbox.component';
 @NgModule({
-    declarations: [IdeaComponent,IdeaFormComponent,IdeaListComponent],
+    declarations: [IdeaComponent,IdeaFormComponent,IdeaListComponent,ModalComponent],
     imports: [
       CommonModule,
       FormsModule,

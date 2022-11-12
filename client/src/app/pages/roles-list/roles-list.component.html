@@ -1,0 +1,52 @@
+<div class="card-header border-0 pt-5">
+
+    <div class="row mb-1">
+
+        <h3 class="card-title align-items-start flex-column col-sm-10 col-md-10">
+            <span class="card-label fw-bolder fs-3 ul">User Roles</span>
+        </h3>
+
+        <div class="col-sm-2 col-md-2">
+            <a routerLink="/role-form" class=" btn btn-sm btn-light-primary float-end">
+                Add New
+            </a>
+        </div>
+    </div>
+
+    <!-- end::Header -->
+    <!-- begin::Body -->
+    <div class="card-body py-3">
+        <!-- begin::Table container -->
+        <div class="table-responsive">
+            <!-- begin::Table -->
+            <table class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-3">
+                <!-- begin::Table head -->
+                <thead>
+                    <tr class="fw-bolder text-muted">
+                        <th>SN</th>
+                        <!-- <th class="min-w-100px">Function Id</th> -->
+                        <th class="min-w-140px">Roles</th>
+                    </tr>
+                </thead>
+                <!-- end::Table head -->
+                <!-- begin::Table body -->
+                <tbody *ngIf="roleList.length > 0">
+
+                    <ng-container *ngFor='let role of roleList; let idx = index'>
+                        <tr>
+                            <td> {{idx + 1}} </td>
+                            <!-- <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.f_area_id}}</td> -->
+                            <td class="text-dark text-hover-primary fs-6">{{role.rolename}}</td>
+                        </tr>
+                    </ng-container>
+
+                </tbody>
+                <!-- end::Table body -->
+            </table>
+            <!-- end::Table -->
+        </div>
+        <!-- end::Table container -->
+    </div>
+    <!-- begin::Body -->
+
+</div>

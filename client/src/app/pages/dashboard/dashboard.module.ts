@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { WidgetsModule } from '../../_metronic/partials';
 
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
@@ -15,6 +17,7 @@ import { WidgetsModule } from '../../_metronic/partials';
       },
     ]),
     WidgetsModule,
+    // NgbModule
   ],
 })
 export class DashboardModule {}

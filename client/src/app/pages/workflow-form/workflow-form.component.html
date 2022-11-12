@@ -1,174 +1,142 @@
 <div class="card">
-    <form
-    class="form w-100 ideaformCont"
-      novalidate="novalidate"
-      id="kt_idea_form"
-      #workflowForm ="ngForm">
-  
-    <div class="row"> 
-        <div class="col-md-4">
-            <h3>{{mode | titlecase}} WorkFlow </h3>
+  <form class="form w-100 ideaformCont" novalidate="novalidate" id="kt_idea_form" #workflowForm="ngForm">
+    <div class="row mb-2">
+      <div class="col-md-9 col-sm-9 ul mt-2">
+        <h3  *ngIf="mode=='edit'">Edit WorkFlow</h3>
+        <h3  *ngIf="mode=='add'">New WorkFlow</h3>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a routerLink="/work-flow" class="btn btn-sm btn-light-primary float-end">
+          < Back </a>
+      </div>
+    </div>
+
+    <!--end::Heading-->
+
+    <!-- begin::Alert info-->
+
+    <!-- end::Alert info-->
+
+    <!-- begin::Alert error-->
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">
+          Kindly fill all the fields
         </div>
-      <div class="col-md-2 offset-md-10 text-center">
-        <!-- <button
-          type="button"
-          id="kt_sign_in_back"
-    
-          class="btn btn-lg btn-gray w-100 mb-5"
-        >Back
-         
-        </button> -->
-        <a
-  routerLink="/work-flow"
-  class="btn btn-sm btn-light-primary"
-  >
-  < Back
-  </a>
       </div>
-        <!-- begin::Separator  -->
+    </ng-container>
+    <!-- end::Alert error-->
+
+    <!--begin::Form group-->
+
+
+    <div class="row mb-10">
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Category</label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          id="cat_id" name="cat_id" autocomplete="off" [(ngModel)]="cat_id">
+          <ng-container >
+            <option hidden>Select Category</option>
+            <option *ngFor="let cat of cate" [value]="cat.cat_id">{{cat.cat_desc}}</option>
+          </ng-container>
+        </select>
+
       </div>
-  
-  
-      
+
+
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          id="f_area_id" type="text" name="f_area_id" autocomplete="off" [(ngModel)]="f_area_id">
           
-        <!--end::Heading-->
-      
-        <!-- begin::Alert info-->
-      
-        <!-- end::Alert info-->
-      
-        <!-- begin::Alert error-->
-        <ng-container *ngIf="hasError">
-          <div class="mb-lg-15 alert alert-danger">
-            <div class="alert-text font-weight-bold">
-              Kindly fill all the fields
-            </div>
-          </div>
+          <ng-container >
+            <option hidden>Select Function Area</option>
+            <option *ngFor="let area of farea" [value]="area.f_area_id">{{area.f_area_desc}}</option>
+          </ng-container>
+
+        </select>
+
+      </div>
+
+
+
+    </div>
+    <!--end::Form group-->
+
+    <!--begin::Form group-->
+    <div class="row fv-row mb-10">
+
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Level 1 User</label>
+        <select
+        class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+        name="level1_user" id="level1_user" [(ngModel)]="level1_user">
+        <ng-container *ngIf="users[0].userid">
+          <option hidden>Select Reviewer</option>
+          <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
+
         </ng-container>
-        <!-- end::Alert error-->
-      
-        <!--begin::Form group-->
-       
-  
-  <div class="row mb-10">
-        <div class="col-md-4">
-          <label class="form-label fs-6 fw-bolder text-dark">Category</label>
-          <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-             id="cat_id"   
-            name="cat_id"
-            autocomplete="off"
-            [(ngModel)]="cat_id">
-            <option value="1">Business Process</option>
-            <option value="7">Services</option>
-            <option value="8">Working Environment</option>
-          </select>
-   
-        </div>
-  
-  
-        <div class="col-md-4">
-          <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
-          <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-             id="f_area_id"  type="text"
-             name="f_area_id"
-             autocomplete="off"
-             [(ngModel)]="f_area_id">
-            <option value="1">IT</option>
-            <option value="2">Sale</option>
-            <option value="3">Shipping</option>
-            <option value="4">Prodution</option>
-            <option value="5">Accounts</option>
-            <option value="6">Audit</option>
-            <option value="7">Admin</option>
-            <option value="8">HR</option>
-          <!-- --> 
-         
-           
-          </select> 
-   
-        </div>
-          
-            
-  
+
+      </select>
+
       </div>
-        <!--end::Form group-->
-      
-        <!--begin::Form group-->
-        <div class="row fv-row mb-10">
-  
-            <div class="col-md-4">
-                <label class="form-label fs-6 fw-bolder text-dark">Level 1 User</label>
-                <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-                   name="level1_user" id="level1_user" [(ngModel)]="level1_user">
-                   <ng-container *ngIf="users[0].userid">
-                    <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
-                 
-                   </ng-container>
-                </select> 
-         
-              </div>
 
-              <div class="col-md-4">
-                <label class="form-label fs-6 fw-bolder text-dark">Level 2 User</label>
-                <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-                   name="level2_user" id="level2_user"  [(ngModel)]="level2_user">
-                   <ng-container *ngIf="users[0].userid">
-                    <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
-                 
-                   </ng-container>
-                               
-                </select> 
-         
-              </div>
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">Level 2 User</label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          name="level2_user" id="level2_user" [(ngModel)]="level2_user">
+          <ng-container *ngIf="users[0].userid">
+            <option hidden>Select Reviewer</option>
+            <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
 
-              <div class="col-md-4">
-                <label class="form-label fs-6 fw-bolder text-dark">User level 3 </label>
-                <select class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
-                   name="function_area" id="f_area_id" name="level3_user" id="level3_user"  [(ngModel)]="level3_user">
-                   <ng-container *ngIf="users[0].userid">
-                    <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
-                 
-                   </ng-container>
-                 
-                </select> 
-         
-              </div>
-                
-   
-        </div>
-  
-        
-        <!--end::Form group-->
-      
-        <!--begin::Action-->
-        <div class="row align-items-end">
-        <div class="col-md-2 offset-md-10 text-center">
-          <button *ngIf="mode=='add'" (click)="submit(workflowForm)"
-            type="submit"
-            id="kt_sign_in_submit"
-            class="btn btn-sm btn-primary w-55 mb-5">
-            Submit       
-          </button>
-          <button *ngIf="mode=='edit'" (click)="updateWorkflow(workflowForm)"
-            type="submit"
-            id="kt_sign_in_submit"
-            class="btn btn-sm btn-primary w-75 mb-5">
-            Edit       
-          </button>
-        </div>
-          <!-- begin::Separator  -->
-        </div>
-        <!--end::Action-->
-      </form>
-      <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation"
-  >
-    <ng-container
-      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-    >
+          </ng-container>
+
+        </select>
+
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fs-6 fw-bolder text-dark">User level 3 </label>
+        <select
+          class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+          name="function_area" id="f_area_id" name="level3_user" id="level3_user" [(ngModel)]="level3_user">
+          <ng-container *ngIf="users[0].userid">
+            <option hidden>Select Reviewer</option>
+            <option *ngFor="let user of users" value={{user.userid}}>{{user.fullname}}</option>
+
+          </ng-container>
+
+        </select>
+
+      </div>
+
+
+    </div>
+
+
+    <!--end::Form group-->
+
+    <!--begin::Action-->
+    <div class="row align-items-end">
+      <div class="col-md-2 offset-md-10 text-center">
+        <button *ngIf="mode=='add'" (click)="submit(workflowForm)" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-primary mb-5">
+          Submit
+        </button>
+        <button *ngIf="mode=='edit'" (click)="updateWorkflow(workflowForm)" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-primary mb-5">
+          Submit
+        </button>
+      </div>
+      <!-- begin::Separator  -->
+    </div>
+    <!--end::Action-->
+  </form>
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
       <div class="fv-plugins-message-container">
         <span role="alert">
           {{ message }}
@@ -176,7 +144,5 @@
       </div>
     </ng-container>
   </ng-template>
-  
-  </div>
-  
-  
+
+</div>

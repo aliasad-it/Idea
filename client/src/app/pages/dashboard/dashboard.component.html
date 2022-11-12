@@ -6,7 +6,7 @@ class="btn btn-lg btn-light-primary"
 Add New Idea
 </a> -->
 
-<div class="row g-5 g-xl-8">
+<div class="row g-5 g-xl-8" *ngIf="userdata.roleid=='1' || userdata.roleid=='2'">
   <!-- begin::Col -->
   <div class="col-xl-6">
     <div class="card card-xl-stretch mb-5 mb-xl-8">
@@ -14,20 +14,21 @@ Add New Idea
       class="card card-xl-stretch mb-xl-8"
     ></app-tables-widget1> -->
     <div class="row card-header border-0 pt-5">
-      <!-- <div class="row"> -->
-        <h3 class="col-md-5 card-title align-items-start flex-column">
-          <span class="card-label fw-bolder fs-3 mb-1">My Ideas</span>
+      
+      <div class="row mb-1">
+        <h3 class="col-sm-8 col-md-7 card-title align-items-start flex-column">
+          <span class="card-label ul fw-bolder fs-3 ">My Ideas</span>
          
         </h3>
-        <div class="col-sm-3 offset-sm-2">
+        <div class="col-sm-3 col-md-4 pt-2">
           <a 
           routerLink="/idea/form"
-          class=" btn btn-sm btn-light-primary"
+          class=" btn btn-sm btn-light-primary float-end"
           >
-        NewIdea
+        New Idea
           </a>
         </div> 
-      <!-- </div> -->
+      </div>
      
 
     </div>
@@ -36,6 +37,13 @@ Add New Idea
     <div class="card-body py-3">
       <!-- begin::Table container -->
       <div class="table-responsive">
+        <ng-container *ngIf="hasError">
+          <div class="mb-lg-15 alert alert-danger">
+            <div class="alert-text font-weight-bold">
+              Can't update when idea is under review
+            </div>
+          </div>
+        </ng-container>
         <!-- begin::Table -->
         <table id="t2"
         class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-5"
@@ -44,22 +52,22 @@ Add New Idea
         <thead>
           <tr class="fw-bolder text-muted">
             <th>SN</th>
-            <th class="min-w-150px">Idea Subject</th>
+            <th>Idea Subject</th>
             <!-- <th class="min-w-140px">Description</th> -->
             <!-- <th class="min-w-120px">Date</th> -->
-            <th class="min-w-120px">Function Area</th>
+            <th>Function Area</th>
             <th>Status</th>
-            <!-- <th class="min-w-100px text-end">Actions</th> -->
+            <th class="text-end">Actions</th>
           </tr>
         </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
-        <tbody *ngIf="ideasList.length > 0">
+        <tbody>
           
           <ng-container *ngFor='let idea of ideasList; let idx = index'>
           <tr >
             <td> {{idx + 1}} </td>
-            <td>{{idea.subject}}</td>
+            <td> <span class="openmodal" (click)="openModal(idea)">{{idea.subject}}</span></td>
             <!-- <td>{{idea.description}}</td> -->
             <!-- <td>{{idea.date}}</td> -->
             <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.f_area_desc}}</td>
@@ -67,15 +75,19 @@ Add New Idea
               <span class="badge badge-light-success" [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
             </td>
             <td class="text-end">
-              <!-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+              <button (click)="ideaUpdate(idea)"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                 <span class="svg-icon svg-icon-3"> </span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                <span class="svg-icon svg-icon-3"></span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                <span class="svg-icon svg-icon-3"></span>
-              </a> -->
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.3"
+                    d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
+                    fill="currentColor"></path>
+                  <path
+                    d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
+                    fill="currentColor"></path>
+                </svg>
+              </button>
+              
             </td>
           </tr>
         </ng-container>
@@ -93,14 +105,14 @@ Add New Idea
   <!-- end::Col -->
 
   <!-- begin::Col -->
-  <div class="col-xl-6">
+  <div class="col-xl-6" *ngIf="userdata.roleid=='1' || userdata.roleid=='2'">
     <div class="card card-xl-stretch mb-5 mb-xl-8">
       <!-- <app-tables-widget1
            class="card card-xl-stretch mb-xl-8"
          ></app-tables-widget1> -->
          <div class="card-header border-0 pt-5">
            <h3 class="card-title align-items-start flex-column">
-             <span class="card-label fw-bolder fs-3 mb-1">My Approvals</span>
+             <span class="card-label fw-bolder fs-3 ul mb-1">My Approvals</span>
            </h3>
      
          </div>
@@ -127,7 +139,7 @@ Add New Idea
              </thead>
              <!-- end::Table head -->
              <!-- begin::Table body -->
-             <tbody *ngIf="PresentTo.length > 0">
+             <tbody>
                
                <ng-container *ngFor='let idea of PresentTo; let idx = index'>
                <tr >
@@ -177,147 +189,111 @@ Add New Idea
   <!-- end::Col -->
 </div>
 
+<div class="card-header border-0 pt-5" *ngIf="userdata.roleid=='3'">
+  <div class="row mb-1">
+    <h3 class="card-title align-items-start flex-column col-sm-10 col-md-10">
+      <span class="card-label ul fw-bolder fs-3">MY Ideas</span>
+    </h3>
+    <div class="col-sm-2 col-md-2">
+      <a routerLink="/idea/form" class=" btn btn-sm btn-light-primary float-end">
+        Add New
+      </a>
+    </div>
+  </div>
 
-<!-- <div class= "row">
-  <div class="col-md-6" no-gutters>
-<div class="row g-5 g-xl-8">-->
-  <!---old- <div *ngFor="let dep of departments" class="col-xl-3">
-    <app-stats-widget5 (click)="ideaForm(dep)"
-      svgIcon={{dep.svgIcon}}
-      class={{dep.class}}
-      color={{dep.color}}
-      iconColor={{dep.iconColor}}
-      title={{dep.title}}
-      description={{dep.description}}
-    ></app-stats-widget5>
-  </div> -->
-  <!--------------------->
-<!----  <div class="card-body py-3"> -->
+
+  <!-- end::Header -->
+  <!-- begin::Body -->
+  <div class="card-body py-3">
     <!-- begin::Table container -->
-    <!-- <div class="table-responsive"> -->
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">
+          Can't update when idea is under review
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="table-responsive">
       <!-- begin::Table -->
-      <!-- <table id="t1"
-        class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"
-        > -->
+
+      <table class="table table-responsive table-row-bordered table-striped table-hover table-row-gray-100 align-middle gs-0 gy-3">
         <!-- begin::Table head -->
-        <!-- <thead>
+        <thead>
           <tr class="fw-bolder text-muted">
             <th>SN</th>
-            <th class="min-w-150px">Idea Subject</th>
-           <!---- <th class="min-w-140px">Description</th>-->
-            <!-- <th class="min-w-120px">Date</th>
-            <th class="min-w-120px">Presented By</th>
-            <th>Status</th> --> 
-          <!----  <th class="min-w-100px text-end">Actions</th> -->
-          <!-- </tr>
-        </thead> -->
+            <th class="">Idea Subject</th>
+            <th class="">Description</th>
+            <th class="">Function Area</th>
+            <th class="">Date</th>
+            <th class="">Presented By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
-        <!-- <tbody *ngIf="ideasList.length > 0">
-         
+        <tbody *ngIf="ideasList.length > 0">
+
           <ng-container *ngFor='let idea of ideasList; let idx = index'>
-            
-          <tr >
-            <td> {{idx + 1}} </td>
-            <td>{{idea.subject}}</td> -->
-          <!---- <td>{{idea.description}}</td> -->
-            <!-- <td>{{idea.date}}</td>
-            <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.presentedBy}}</td>
-            <td>
-              <span class="badge badge-light-success">{{idea.status}}</span>
-            </td>
-            <td class="text-end"> -->
-              <!-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                <span class="svg-icon svg-icon-3"> </span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                <span class="svg-icon svg-icon-3"></span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                <span class="svg-icon svg-icon-3"></span>
-              </a> -->
-            <!-- </td>
-          </tr>
-        </ng-container>
-       
-        </tbody> -->
+            <tr>
+              <td> {{idx + 1}} </td>
+              <td><span class="openmodal" (click)="openModal(idea)">{{idea.subject}}</span></td>
+              <td>{{idea.description}}</td>
+              <td>{{idea.f_area_desc}}</td>
+              <td>{{idea.last_update | date}}</td>
+
+              <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.fullname}}</td>
+              <td>
+                <span class="badge badge-light-success" [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
+              </td>
+              <td class="text-end">
+                <button (click)="ideaUpdate(idea)"
+                  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                  <span class="svg-icon svg-icon-3"> </span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.3"
+                      d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
+                      fill="currentColor"></path>
+                    <path
+                      d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </button>
+                
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
         <!-- end::Table body -->
-      <!-- </table> -->
+      </table>
       <!-- end::Table -->
-    <!-- </div> -->
+    </div>
     <!-- end::Table container -->
-  <!-- </div> -->
+  </div>
   <!-- begin::Body -->
-<!-- </div>
-</div> -->
-<!--secound side-->
-<!-- <div class="col-md-6" no-gutters>
-<div class="row g-5 g-xl-8"> -->
-  <!-- <div *ngFor="let dep of departments" class="col-xl-3">
-    <app-stats-widget5 (click)="ideaForm(dep)"
-      svgIcon={{dep.svgIcon}}
-      class={{dep.class}}
-      color={{dep.color}}
-      iconColor={{dep.iconColor}}
-      title={{dep.title}}
-      description={{dep.description}}
-    ></app-stats-widget5>
-  </div> -->
-  <!-- <div class="card-body py-3"> -->
-    <!-- begin::Table container -->
-    <!-- <div class="table-responsive"> -->
-      <!-- begin::Table -->
-      <!-- <table id="t2"
-        class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"
-      > -->
-        <!-- begin::Table head -->
-        <!-- <thead>
-          <tr class="fw-bolder text-muted">
-            <th>SN</th>
-            <th class="min-w-150px">Idea Subject</th> -->
-           <!---- <th class="min-w-140px">Description</th> -->
-            <!-- <th class="min-w-120px">Date</th>
-            <th class="min-w-120px">Presented By</th>
-            <th>Status</th> -->
-           <!---- <th class="min-w-100px text-end">Actions</th>  -->
-          <!-- </tr>
-        </thead> -->
-        <!-- end::Table head -->
-        <!-- begin::Table body -->
-        <!-- <tbody *ngIf="ideasList.length > 0">
-          
-          <ng-container *ngFor='let idea of ideasList; let idx = index'>
-          <tr >
-            <td> {{idx + 1}} </td>
-            <td>{{idea.subject}}</td> -->
-           <!---- <td>{{idea.description}}</td> -->
-            <!-- <td>{{idea.date}}</td>
-            <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.presentedBy}}</td>
-            <td>
-              <span class="badge badge-light-success">{{idea.status}}</span>
-            </td>
-            <td class="text-end"> -->
-              <!-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                <span class="svg-icon svg-icon-3"> </span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                <span class="svg-icon svg-icon-3"></span>
-              </a>
-              <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                <span class="svg-icon svg-icon-3"></span>
-              </a> -->
-            <!-- </td>
-          </tr>
-        </ng-container>
-       
-        </tbody> -->
-        <!-- end::Table body -->
-      <!-- </table> -->
-      <!-- end::Table -->
-    <!-- </div> -->
-    <!-- end::Table container -->
-  <!-- </div> -->
-  <!-- begin::Body -->
-<!-- </div>
+
 </div>
-</div> --> 
+
+<!-- Model box -->
+<!-- <button class="btn btn-primary" (click)="openModal()">Open modal</button> -->
+<!-- <button class="btn btn-danger" (click)="triggerModal('modalData')">Open Modal</button>
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Angular Bootstrap Modal Popup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete <span class="text-primary">"Agatha Harkness"</span> profile?</strong></p>
+    
+    <p>All data related to west view profile will be removed permanently.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template> -->

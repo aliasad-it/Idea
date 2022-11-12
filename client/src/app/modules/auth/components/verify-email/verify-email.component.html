@@ -1,0 +1,41 @@
+<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
+novalidate="novalidate"
+id="kt_login_signup_form"
+#confirmEmailForm ="ngForm" >
+
+  <div class="mb-10 text-center">
+    <h1 class="text-dark mb-3">Confirm your Email Address</h1>
+    <div class="text-gray-400 fw-bold fs-4">
+      Not your account?
+      <a routerLink="/auth/logout" class="link-primary fw-bolder" [style.margin-left]="'5px'">Log out</a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="hasError">
+    <div class="mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        Entered code is incorrect
+      </div>
+    </div>
+  </ng-container>
+<div *ngIf="!emailVerified">
+  <div class="row fv-row mb-7">
+     <label class="form-label fw-bolder text-dark fs-6">Enter Pin</label>
+    <input class="form-control form-control-lg form-control-solid" type="text" name="confirmEmail"
+     placeholder="Enter Pin" autocomplete="off" 
+     [(ngModel)]="confirmEmail" />
+  </div>
+
+  <button type="submit" class="btn btn-lg btn-primary w-100 mb-5"
+   (click)="submit(confirmEmailForm)"
+   >Submit</button>
+  </div>
+  <div *ngIf="emailVerified">
+    <p>Email Verified Successfully!</p>
+    <div class="text-gray-400 fw-bold fs-4">
+     
+      <a routerLink="/" class="link-primary fw-bolder" [style.margin-left]="'5px'">Login</a>
+    </div>
+  </div>
+
+</form>

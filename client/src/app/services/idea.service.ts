@@ -11,19 +11,21 @@ import * as GLOBAL from '../global';
 export class IdeaService {
   assets:any ;
   constructor(public http: HttpClient ) {
-    console.log('Idea Service Initialized...');
   }
  
   
 
   getIdeaList(userdata: any): Observable<any> {
-    console.log("Idea list service ", userdata);
     
     return this.http.post(GLOBAL.serviceUrl + '/ideas/getIdeasList' , userdata );
   }
 
+  IdeaList(userdata: any): Observable<any> {
+    
+    return this.http.post(GLOBAL.serviceUrl + '/ideas/IdeasList' , userdata );
+  }
+
   PresentTo(userdata: any): Observable<any> {
-    console.log("present to service ", userdata);
     
     return this.http.post(GLOBAL.serviceUrl + '/ideas/PresentTo' , userdata );
   }
@@ -31,7 +33,6 @@ export class IdeaService {
   getSaveIdea(newidea: any): Observable<any> {
 
     newidea.roles = [3]; // Manager
-    console.log("New Idea service ", newidea);
     newidea.last_update = new Date(Date.now() );
     newidea.idea_status = 'New';
     newidea.present_to = '1st Level Reviewer';
@@ -43,13 +44,11 @@ export class IdeaService {
   }
   
   getIdeaUpdate(userdata: any): Observable<any> {
-    console.log("Idea updated ", userdata);
     
     return this.http.post(GLOBAL.serviceUrl + '/ideas/getIdeasUpdate' , userdata );
   }
 
   SelectIdea(idea_id:any): Observable<any> {
-    console.log("Select Idea service ",idea_id );
     
     return this.http.get(GLOBAL.serviceUrl + '/ideas/SelectIdea/' + idea_id );
   }

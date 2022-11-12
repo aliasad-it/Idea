@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { FormBuilder, NgForm, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-idea-update',
@@ -31,17 +32,19 @@ export class IdeaUpdateComponent implements OnInit {
   updateby: any;
   userdata: any;
   idea:any;
+  cate:any;
+  farea:any;
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    public ideasService: IdeaService
+    public ideasService: IdeaService,
+    public admin: AdminService
   ) { }
 
   ngOnInit(): void {
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata);  
     this.idea=history.state;
-    console.log(this.idea);
     this.idea_id = this.idea.idea_id;
     this.subject = this.idea.subject;
     this.description = this.idea.description;
@@ -51,6 +54,12 @@ export class IdeaUpdateComponent implements OnInit {
     this.f_area_desc = this.idea.f_area_desc;
     this.last_update= this.idea.last_update;
     this.updateby = this.idea.updateby;
+    this.admin.getCategoryList(this.userdata).subscribe(data=>{
+      this.cate = data.data;
+    })
+    this.admin.getFunctionList(this.userdata).subscribe(data=>{
+      this.farea = data.data;
+    })
   }
   get f() {
     return this.ideaForm.controls;
@@ -63,10 +72,8 @@ export class IdeaUpdateComponent implements OnInit {
       return
   
     }
-    console.log("Idea is updated", form.value);
     form.value['updateby'] = Number(this.userdata.userid);
     form.value['last_update'] = new Date(Date.now() );
-    console.log(form.value);
     this.hasError = false;
     
     
@@ -74,7 +81,7 @@ export class IdeaUpdateComponent implements OnInit {
     this.idea.subject=this.subject,
     this.idea.description=this.description,
     this.idea.cat_id=this.cat_id,
-    this.idea.f_area_id=this.idea.f_area_id,
+    this.idea.f_area_id=this.f_area_id,
     this.idea.update_by=Number(this.userdata.userid),
     this.idea.last_update=new Date(Date.now() )
     
@@ -82,16 +89,14 @@ export class IdeaUpdateComponent implements OnInit {
 
 
     this.ideasService.getIdeaUpdate(this.idea).subscribe(data => {
-      console.log(this.idea);
       if (data.status){
-        this.router.navigateByUrl('/idea-list')
+        this.router.navigateByUrl('/dashboard')
        }else {
         this.hasError = true;
         this.ErrorMassage = 'Failed to update idea.';
       }
       // this.ideaForms = data.data;
      
-      // console.log(this.ideaForms);
     }); 
 }
 }

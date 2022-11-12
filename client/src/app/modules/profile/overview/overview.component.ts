@@ -27,13 +27,11 @@ export class OverviewComponent implements OnInit {
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata);  
     this.idea=history.state;
-    console.log(this.idea);
     this.idea_id = this.idea.idea_id;
     this.updateby = this.idea.updateby;
   
 
   this.authenticationService.getProfile(this.userdata.userid).subscribe(data => {
-    console.log(this.userdata.userid);
     if (data.status){
       this.userProfile = data.data;
 
@@ -43,7 +41,6 @@ export class OverviewComponent implements OnInit {
     }
     // this.ideaForms = data.data;
    
-    // console.log(this.ideaForms);
   }); 
 }
 }

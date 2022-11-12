@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, NgForm, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
@@ -27,9 +27,11 @@ export class WorkFlowFormComponent implements OnInit {
   level2_user:any;
   level3_user:any;
  userdata:any;
-  users:any=[];
+  users:any=[{userid:1}];
   mode: any;
   wflowid:any;
+  cate:any;
+  farea:any;
 
   private unsubscribe: Subscription[] = [];
   constructor(
@@ -37,29 +39,39 @@ export class WorkFlowFormComponent implements OnInit {
     private fb: FormBuilder,
     public ideasService: IdeaService,
     public adminService: AdminService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef
     ) { }
 
   ngOnInit(): void {
     this.mode = this.route.snapshot.paramMap.get('mode');
+    this.ideasService.getAllUsers().subscribe(users => {
+      this.users=users.data
+      this.cd.detectChanges();
+  })
     if(this.mode == 'edit'){
         this.wflowid= this.route.snapshot.paramMap.get('wflowid');
         this.adminService.getWrkflow(this.wflowid).subscribe(wflow => {
-            console.log(wflow);
             this.cat_id=wflow.data.cat_id;
             this.f_area_id=wflow.data.f_area_id;
             this.level1_user=wflow.data.level1_user;
             this.level2_user=wflow.data.level2_user;
             this.level3_user=wflow.data.level3_user;
+            this.cd.detectChanges();
             //this.users=users.data
         })
     }
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata);        
     // this.router.getCurrentNavigation().extras.state
-    this.ideasService.getAllUsers().subscribe(users => {
-        console.log(users)
-        this.users=users.data
+    
+    this.adminService.getCategoryList(this.userdata).subscribe(data=>{
+      this.cate = data.data;
+      this.cd.detectChanges();
+    })
+    this.adminService.getFunctionList(this.userdata).subscribe(data=>{
+      this.farea = data.data;
+      this.cd.detectChanges();
     })
   }
   get f() {
@@ -67,13 +79,10 @@ export class WorkFlowFormComponent implements OnInit {
   }
 
   submit(form: NgForm) {
-    console.log("workflow is new", form.value);
     
-    console.log(form.value);
     this.hasError = false;
    
     this.adminService.SaveWorkflow(form.value).subscribe(data => {
-      console.log(data);
       if (data.status){
         this.router.navigateByUrl('/work-flow')
        }else {
@@ -82,19 +91,14 @@ export class WorkFlowFormComponent implements OnInit {
       }
       this.ideaForms = data.data;
      
-      console.log(this.ideaForms);
     }); 
     
   }
 
   updateWorkflow(form: NgForm) {
-    console.log("workflow is new", form.value);
     
-    console.log(form.value);
     this.hasError = false;
-   
-    this.adminService.updateWorkflow(form.value).subscribe(data => {
-      console.log(data);
+    this.adminService.updateWorkflow(form.value,this.wflowid).subscribe(data => {
       if (data.status){
         this.router.navigateByUrl('/work-flow')
        }else {
@@ -103,7 +107,6 @@ export class WorkFlowFormComponent implements OnInit {
       }
       this.ideaForms = data.data;
      
-      console.log(this.ideaForms);
     }); 
   }
 

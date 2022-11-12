@@ -22,6 +22,7 @@ export class ChangePassComponent implements OnInit {
   new_password:any;
   confirm_password:any;
   userdata: any;
+  errorMessage: any;
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +31,6 @@ export class ChangePassComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('change password');
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata); 
   }
@@ -40,17 +40,37 @@ export class ChangePassComponent implements OnInit {
   }
 
   submit(form: NgForm) {
-    console.log("change password", form.value);
+    this.hasError = true;
     form.value['update_by'] = Number(this.userdata.userid);
-    console.log(form.value);
-    this.hasError = false;
-   
-    this.authenticationService.ChangePass('password').subscribe(data => {
-      console.log(data);
-      this.changeForms = data.data;
-     
-      console.log(this.changeForms);
-    }); 
-  }
+    if (this.old_password === this.userdata.password) {
+      if (this.new_password !== null || this.new_password !== "") {
+        if (this.new_password.length > 7) {
+          if (this.new_password === this.confirm_password) {
+            if (this.new_password === this.userdata.password) {
+              this.errorMessage = 'Old password cannot be your new password';
+            }
+            else {
+              this.authenticationService.ChangePass(this.userdata.userid, this.confirm_password)
+              .subscribe(data => {
+                this.changeForms = data.data;
+                });
+              this.errorMessage = null;
+              this.router.navigateByUrl('/profile/overview')
+            }
+          }else {
+            this.errorMessage = "Passwords don't match";
+          }
+        }else{
+          this.errorMessage="Password must be 8 characters long."
+        }
+      }else {
+        this.errorMessage = "New password can't be empty";
+      }
+    }else {
+      this.errorMessage = "Old password is incorrect";
+    }
+  };
 
+
+  
 }

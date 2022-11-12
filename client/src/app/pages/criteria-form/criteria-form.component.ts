@@ -30,7 +30,7 @@ export class CriteriaFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('criteria page');
+    ('criteria page');
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata); 
   }
@@ -38,17 +38,14 @@ export class CriteriaFormComponent implements OnInit {
     return this.criteriaForm.controls;
   }
   submit(form: NgForm) {
-    console.log("criteria is new", form.value);
     form.value['update_by'] = Number(this.userdata.userid);
-    console.log(form.value);
     this.hasError = false;
    
     this.adminService.getAddCriteria(form.value).subscribe(data => {
-      console.log(data);
       this.criteriaForms = data.data;
      
-      console.log(this.criteriaForms);
     }); 
+    this.router.navigateByUrl("/criteria-list");
   }
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());

@@ -23,10 +23,8 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
    
       this.adminService.getCategoryList(this.userdata).subscribe(data => {
-        console.log(data);
         this.categoryList = data.data;
        
-        console.log(this.categoryList);
     });
   }
 

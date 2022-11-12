@@ -1,0 +1,62 @@
+<div class="card">
+  <form class="form w-100 ideaformCont" novalidate="novalidate" id="kt_change_form" #changeForm="ngForm">
+    <div class="row mb-2">
+      <div class="col-md-9 col-sm-9 ul mt-2">
+        <h3>Edit Role</h3>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a onclick="history.back()" class="btn btn-sm btn-light-primary float-end">
+          < Back </a>
+      </div>
+    </div>
+    <div class="row mb-10">
+
+      <div class="fv-row col-md-3 mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Name</label>
+        <input class="border border-secondary form-control disabled form-control-lg form-control-solid" type="text" name="name"
+          autocomplete="off" [(ngModel)]="user.fullname" disabled="disabled" />
+
+      </div>
+
+      <div class="fv-row col-md-3 mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+        <input class="border border-secondary form-control form-control-lg form-control-solid" type="text" name="email"
+          autocomplete="off" [(ngModel)]="user.email" disabled="disabled" />
+      </div>
+
+      <div class="fv-row col-md-3 mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Phone Number</label>
+        <input class="border border-secondary form-control form-control-lg form-control-solid" type="text" name="phone"
+          autocomplete="off" [(ngModel)]="user.phone" disabled="disabled" />
+      </div>
+      
+      <div class="fv-row col-md-3 mb-10">
+        <label class="form-label fs-6 fw-bolder text-dark">Role</label>
+        <select 
+         class="form-select form-select-solid border border-primary form-control form-control-lg form-control-solid"
+         name="roleid" [(ngModel)]="user.roleid"
+         >
+         <ng-container *ngIf="roles$.length>0">
+           <option  *ngFor="let role of roles$" [value]="role.roleid">{{role.rolename}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+    </div>
+    <div class="fv-row align-items-end">
+      <div class="col-md-2 offset-md-10 text-center">
+        <button (click)="submit(changeForm)" type="submit" id="kt_sign_in_submit"
+          class="btn btn-sm btn-primary w-55 mb-5">Submit
+
+        </button>
+
+      </div>
+    </div>
+
+
+
+  </form>
+
+
+
+</div>

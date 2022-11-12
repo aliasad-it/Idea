@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AuthenticationService } from 'src/app/services/authentication.service'; 
 import { ConfirmPasswordValidator } from './confirm-password.validator';
 import { UserModel } from '../../models/user.model';
 import { first } from 'rxjs/operators';
@@ -23,6 +24,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private authenticationService: AuthenticationService,
     private router: Router
   ) {
     this.isLoading$ = this.authService.isLoading$;
@@ -53,19 +55,28 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           ]),
         ],
         email: [
-          'qwe@qwe.qwe',
+          '',
           Validators.compose([
             Validators.required,
             Validators.email,
-            Validators.minLength(3),
+            Validators.minLength(6),
             Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          ]),
+        ],
+        phone: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(12),
+            Validators.pattern('[0-9]*')
           ]),
         ],
         password: [
           '',
           Validators.compose([
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(8),
             Validators.maxLength(100),
           ]),
         ],
@@ -73,19 +84,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           '',
           Validators.compose([
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(8),
             Validators.maxLength(100),
           ]),
         ],
 
-        FunctionArea: [
-          '',
-          Validators.compose([
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(100),
-          ]),
-        ],
         agree: [false, Validators.compose([Validators.required])],
       },
       {
@@ -104,12 +107,15 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
     const newUser = new UserModel();
     newUser.setUser(result);
-    const registrationSubscr = this.authService
-      .registration(newUser)
+    const registrationSubscr = this.authenticationService.createUser(newUser)
+   // const registrationSubscr = this.authService
+     // .registration(newUser)
       .pipe(first())
-      .subscribe((user: UserModel) => {
+      .subscribe((user: any) => {
         if (user) {
-          this.router.navigate(['/']);
+          let url= "/auth/verify-email/" + user.redirect
+          this.router.navigate(['/auth/verify-email/'+user.redirect]);
+          
         } else {
           this.hasError = true;
         }

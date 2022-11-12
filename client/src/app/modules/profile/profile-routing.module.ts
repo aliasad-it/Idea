@@ -7,6 +7,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProfileComponent } from './profile.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,11 @@ const routes: Routes = [
         
         path: 'change-password',
         component: ChangePassComponent
+      },
+      {
+        
+        path: 'edit-profile',
+        component: EditProfileComponent
       },
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' },

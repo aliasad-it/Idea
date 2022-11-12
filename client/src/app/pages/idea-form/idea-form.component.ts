@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { FormBuilder, NgForm, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-idea-form',
@@ -27,12 +28,15 @@ export class IdeaFormComponent implements OnInit {
   idea_status: any;
   updateby: any;
   userdata: any;
+  cate:any;
+  farea:any;
 
   private unsubscribe: Subscription[] = [];
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    public ideasService: IdeaService
+    public ideasService: IdeaService,
+    public admin:AdminService
     ) { }
 
   ngOnInit(): void {
@@ -40,19 +44,22 @@ export class IdeaFormComponent implements OnInit {
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata);        
     // this.router.getCurrentNavigation().extras.state
+    this.admin.getCategoryList(this.userdata).subscribe(data=>{
+      this.cate = data.data;
+    })
+    this.admin.getFunctionList(this.userdata).subscribe(data=>{
+      this.farea = data.data;
+    })
   }
   get f() {
     return this.ideaForm.controls;
   }
 
   submit(form: NgForm) {
-    console.log("Idea is new", form.value);
     form.value['updateby'] = Number(this.userdata.userid);
-    console.log(form.value);
     this.hasError = false;
    
     this.ideasService.getSaveIdea(form.value).subscribe(data => {
-      console.log(data);
       if (data.status){
         this.router.navigateByUrl('/dashboard')
        }else {
@@ -61,7 +68,6 @@ export class IdeaFormComponent implements OnInit {
       }
       this.ideaForms = data.data;
      
-      console.log(this.ideaForms);
     }); 
       
    

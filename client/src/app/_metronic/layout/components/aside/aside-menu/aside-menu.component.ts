@@ -10,12 +10,16 @@ import { environment } from '../../../../../../environments/environment';
 export class AsideMenuComponent implements OnInit {
   appAngularVersion: string = environment.appVersion;
   appPreviewChangelogUrl: string = environment.appPreviewChangelogUrl;
+  userdata:any;
 
   constructor(
     private auth: AuthService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() : void {
+    this.userdata=localStorage.getItem('user');
+    this.userdata=JSON.parse(this.userdata);
+  }
 
   logout() {
     this.auth.logout();

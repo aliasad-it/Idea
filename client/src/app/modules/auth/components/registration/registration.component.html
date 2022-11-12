@@ -46,13 +46,13 @@
 
   <!--begin::Form group-->
   <div class="row fv-row mb-7">
-    <label class="form-label fw-bolder text-dark fs-6">Fullname</label>
+    <label class="form-label fw-bolder text-dark fs-6">Full Name</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="text"
       name="fullname"
       formControlName="fullname"
-      placeholder="Fullname"
+      placeholder="Full Name"
       autocomplete="off"
       [ngClass]="{
         'is-invalid': registrationForm.controls['fullname'].invalid,
@@ -71,7 +71,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Fullname should have at least 3 symbols',
+        message: 'Fullname should have at least 3 letters',
         control: registrationForm.controls['fullname']
       }"
     ></ng-container>
@@ -79,7 +79,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Fullname should have maximum 100 symbols',
+        message: 'Fullname should have maximum 100 letters',
         control: registrationForm.controls['fullname']
       }"
     ></ng-container>
@@ -121,7 +121,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Email should have at least 3 symbols',
+        message: 'Email should have at least 6 letters',
         control: registrationForm.controls['email']
       }"
     ></ng-container>
@@ -129,8 +129,60 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Email should have maximum 360 symbols',
+        message: 'Email should have maximum 360 letters',
         control: registrationForm.controls['email']
+      }"
+    ></ng-container>
+  </div>
+  <!--end::Form group-->
+
+
+  <!--begin::Form group-->
+
+  <div class="mb-10 fv-row">
+    <label class="form-label fw-bolder text-dark fs-6">Phone Number</label>
+    <input
+      class="form-control form-control-lg form-control-solid"
+      type="tel"
+      placeholder="Phone Number"
+      name="phone"
+      formControlName="phone"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': registrationForm.controls['phone'].invalid,
+        'is-valid': registrationForm.controls['phone'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Phone Number is required',
+        control: registrationForm.controls['phone']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Phone Number should have at least 11 numbers',
+        control: registrationForm.controls['phone']
+      }"
+    ></ng-container>
+    <ng-container
+    [ngTemplateOutlet]="formError"
+    [ngTemplateOutletContext]="{
+      validation: 'maxLength',
+      message: 'Phone Number should have maximum 12 numbers',
+      control: registrationForm.controls['phone']
+    }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'pattern',
+        message: 'Phone Number should have only numbers',
+        control: registrationForm.controls['phone']
       }"
     ></ng-container>
   </div>
@@ -163,7 +215,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Password should have at least 3 symbols',
+        message: 'Password should have at least 8 symbols',
         control: registrationForm.controls['password']
       }"
     ></ng-container>
@@ -205,7 +257,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Confirm Password should have at least 3 symbols',
+        message: 'Confirm Password should have at least 8 symbols',
         control: registrationForm.controls['cPassword']
       }"
     ></ng-container>
@@ -231,45 +283,7 @@
     </ng-container>
   </div>
 
-  <div class="mb-10 fv-row">
-    <label class="form-label fw-bolder text-dark fs-6">Function Area</label>
-    <input
-      class="form-control form-control-lg form-control-solid"
-      type="FunctionArea"
-      placeholder="FunctionArea"
-      name="FunctionArea"
-      formControlName="FunctionArea"
-      autocomplete="off"
-      [ngClass]="{
-        'is-invalid': registrationForm.controls['FunctionArea'].invalid,
-        'is-valid': registrationForm.controls['FunctionArea'].valid
-      }"
-    />
-    <ng-container
-      [ngTemplateOutlet]="formError"
-      [ngTemplateOutletContext]="{
-        validation: 'required',
-        message: 'Function Area is required',
-        control: registrationForm.controls['FunctionArea']
-      }"
-    ></ng-container>
-    <ng-container
-      [ngTemplateOutlet]="formError"
-      [ngTemplateOutletContext]="{
-        validation: 'minlength',
-        message: 'Function Area should have at least 3 symbols',
-        control: registrationForm.controls['FunctionArea']
-      }"
-    ></ng-container>
-    <ng-container
-      [ngTemplateOutlet]="formError"
-      [ngTemplateOutletContext]="{
-        validation: 'maxLength',
-        message: 'Function Area should have maximum 100 symbols',
-        control: registrationForm.controls['FunctionArea']
-      }"
-    ></ng-container>
-  </div>
+
   <!--end::Form group-->
 
   <!--begin::Form group-->

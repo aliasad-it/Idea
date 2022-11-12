@@ -12,6 +12,11 @@ import { IdeaListComponent } from './idea-list/idea-list.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CriteriaListComponent } from './criteria-list/criteria-list.component';
 import { CriteriaFormComponent } from './criteria-form/criteria-form.component';
+import { ApprovalComponent } from './approval/approval.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { UsersRoleComponent } from './users-role/users-role.component';
+import { RolesListComponent } from './roles-list/roles-list.component';
+import { RolesUpdateComponent } from './roles-update/roles-update.component';
 
 const Routing: Routes = [
   {
@@ -19,7 +24,8 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
-   { path: 'function-area', component: FunctionAreaComponent},
+  { path: 'approval', component: ApprovalComponent},
+  { path: 'function-area', component: FunctionAreaComponent},
   { path: 'function-list', component: FunctionListComponent},
   { path: 'function-update', component: FunctionUpdateComponent},
   { path: 'category-form', component: CategoryFormComponent},
@@ -29,6 +35,10 @@ const Routing: Routes = [
   { path: 'criteria-form', component: CriteriaFormComponent},
   { path: 'idea-update', component: IdeaUpdateComponent},
   { path: 'idea-list', component: IdeaListComponent},
+  { path: 'users', component: UsersListComponent},
+  { path: 'user-role/:userid', component: UsersRoleComponent},
+  { path: 'role-list', component: RolesListComponent},
+  { path: 'role-form', component: RolesUpdateComponent},
   { path: 'work-flow', component: WorkFlowComponent},
   { path: 'work-flow-form/:mode', component: WorkFlowFormComponent},
   { path: 'work-flow-form/:mode/:wflowid', component: WorkFlowFormComponent},

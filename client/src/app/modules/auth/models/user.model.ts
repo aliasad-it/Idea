@@ -25,7 +25,7 @@ export class UserModel extends AuthModel {
   communication: {
     email: boolean;
     sms: boolean;
-    phone: boolean;
+    phone: any;
   };
   // email settings
   emailSettings?: {

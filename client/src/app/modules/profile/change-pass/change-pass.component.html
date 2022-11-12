@@ -1,103 +1,109 @@
 <!-- <p>function-area works!</p> -->
 <div class="card">
-    <form
-        class="form w-100 category-formCont"
-        novalidate="novalidate"
-        id="kt_change_form"
-        #changeForm ="ngForm">
-        <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bolder fs-3 mb-1 pt-5">Change Password</span>
-          <span class="text-muted mt-1 fw-bold fs-7"></span>
-        </h3>
-        <div class="col-md-2 offset-md-10 mb-10">
+  <form
+      class="form w-100 category-formCont"
+      id="kt_change_form"
+      #changeForm ="ngForm">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1 pt-5">Change Password</span>
+        <span class="text-muted mt-1 fw-bold fs-7"></span>
+      </h3>
+      <div class="col-md-2 offset-md-10 mb-10">
+        
           
-            
-  <a
+<a
 routerLink="/profile"
 class="btn btn-sm btn-light-primary"
 >
 < Back
 </a>
-        </div>
+      </div>
 
-        <ng-container *ngIf="hasError">
-            <div class="mb-lg-15 alert alert-danger">
-              <div class="alert-text font-weight-bold">
-                Kindly fill all the fields
-              </div>
+      <!-- <ng-container *ngIf="hasError">
+          <div class="mb-lg-15 alert alert-danger">
+            <div class="alert-text font-weight-bold">
+              Kindly fill all the fields
             </div>
-          </ng-container>
-
-          <div class="row mb-10">
-
-          <div class="fv-row col-md-4 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">Old Password</label>
-            <input
-              class="border border-primary form-control form-control-lg form-control-solid"
-              type="text"
-              name="old_password"
-              autocomplete="off"
-              [(ngModel)]="old_password"
-            />
-     
           </div>
-
-          <div class="fv-row col-md-4 mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">New Password</label>
-            <input
-              class="border border-primary form-control form-control-lg form-control-solid"
-              type="text"
-              name="new_password"
-              autocomplete="off"
-              [(ngModel)]="new_password"
-            />
-     </div>
-
-     <div class="fv-row col-md-4 mb-10">
-        <label class="form-label fs-6 fw-bolder text-dark">Confirm Password</label>
-        <input
-          class="border border-primary form-control form-control-lg form-control-solid"
-          type="text"
-          name="confirm_password"
-          autocomplete="off"
-          [(ngModel)]="confirm_password"
-        />
- </div>
-
-          </div>
-          <div class="fv-row align-items-end">
-          <div class="col-md-2 offset-md-10 text-center">
-            <button (click)="submit(changeForm)"
-              type="submit" 
-              id="kt_sign_in_submit"
-              class="btn btn-sm btn-primary w-55 mb-5"
-            >Submit
-             
-            </button>
-        
-          </div>
-          </div>
-
-        
-          
-        </form>
-        <ng-template
-        #formError
-        let-control="control"
-        let-message="message"
-        let-validation="validation"
-      >
-        <ng-container
-          *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-        >
-          <div class="fv-plugins-message-container">
-            <span role="alert">
-              {{ message }}
-            </span>
+        </ng-container>  -->
+      <ng-container *ngIf="errorMessage">
+          <div class="mb-lg-15 alert alert-danger">
+            <div class="alert-text font-weight-bold">
+              {{errorMessage}}
+            </div>
           </div>
         </ng-container>
-      </ng-template>
+
+        <div class="row mb-10">
+
+        <div class="fv-row col-md-4 mb-10">
+          <label class="form-label fs-6 fw-bolder text-dark">Old Password</label>
+          <input
+            class="border border-primary form-control form-control-lg form-control-solid"
+            type="Password"
+            name="old_password"
+            autocomplete="off"
+            [(ngModel)]="old_password"
+          />
+   
+        </div>
+
+        <div class="fv-row col-md-4 mb-10">
+          <label class="form-label fs-6 fw-bolder text-dark">New Password</label>
+          <input
+            class="border border-primary form-control form-control-lg form-control-solid"
+            type="Password"
+            name="new_password"
+            autocomplete="off"
+            [(ngModel)]="new_password"
+          />
+   </div>
+
+   <div class="fv-row col-md-4 mb-10">
+      <label class="form-label fs-6 fw-bolder text-dark">Confirm Password</label>
+      <input
+        class="border border-primary form-control form-control-lg form-control-solid"
+        type="Password"
+        name="confirm_password"
+        autocomplete="off"
+        [(ngModel)]="confirm_password"
+      />
+</div>
+
+        </div>
+        <div class="fv-row align-items-end">
+        <div class="col-md-2 offset-md-10 text-center">
+          <button (click)="submit(changeForm)"
+            type="submit" 
+            id="kt_sign_in_submit"
+            class="btn btn-sm btn-primary w-55 mb-5"
+          >Submit
+           
+          </button>
+      
+        </div>
+        </div>
+
+      
+        
+      </form>
+      <ng-template
+      #formError
+      let-control="control"
+      let-message="message"
+      let-validation="validation"
+    >
+      <ng-container
+        *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+      >
+        <div class="fv-plugins-message-container">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </ng-container>
+    </ng-template>
 
 
-    </div> 
+  </div> 
 

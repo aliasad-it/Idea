@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { IdeaService } from 'src/app/services/idea.service';
+import { ModalComponent } from '../modalbox/modalbox.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-idea-form',
@@ -16,8 +18,10 @@ export class IdeaListComponent implements OnInit {
    userdata: any;
    idea:any;
    hasError: boolean;
+   modalRef: MdbModalRef<ModalComponent> | null = null;
+
   constructor(
-    public ideasService: IdeaService,
+    public ideasService: IdeaService,private modalService: MdbModalService,
     public router: Router,
     private fb: FormBuilder,
     ){}
@@ -26,28 +30,8 @@ export class IdeaListComponent implements OnInit {
 
     this.userdata=localStorage.getItem('user');
     this.userdata=JSON.parse(this.userdata);  
-  //  this.ideasList=[
-    // {
-    //     "subject": "@sujbect",
-    //     "description": "Should have a idea portal in which user can share there thoughts aand new ideas related to the problems they are facing",
-    //     "presentedBy": "Ali Asad",
-    //     "date": "8 July 2022",
-    //     "status": "Under Review",
-    //     "department": "IT"
-    // }
-//     {
-//         "subject": "Idea portal",
-//         "desrciption": "Should have a idea portal in which user can share there thoughts aand new ideas related to the problems they are facing",
-//         "presentedBy": "Ali Asad",
-//         "date": "8 July 2022",
-//         "status": "Under Review",
-//         "department": "IT"
-//     }
-//  ]
-    this.ideasService.getIdeaList(this.userdata).subscribe(data => {
-      console.log(data);
+    this.ideasService.IdeaList(this.userdata).subscribe(data => {
       this.ideasList = data.data;
-      console.log(this.ideasList);
     });
   
   }
@@ -58,6 +42,13 @@ export class IdeaListComponent implements OnInit {
    else{
     this.hasError= true;
    }
+  }
+
+  openModal(idea:any) {
+    this.modalRef = this.modalService.open(ModalComponent, {
+      data: {idea:idea},
+      modalClass: 'modal-lg'
+    })
   }
 }
 

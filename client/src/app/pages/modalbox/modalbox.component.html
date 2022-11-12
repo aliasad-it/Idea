@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Idea Details</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="row mb-4">
+
+    <div class="row col-md-4 mb-5">
+      <label class="form-label fs-6 fw-bolder text-dark">Subject</label>
+      <p> {{idea.subject}} </p>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label fs-6 fw-bolder text-dark">Function Area</label>
+      <p> {{idea.f_area_desc}}</p>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label fw-bolder text-dark fs-6">Attachment</label>
+      <br />
+      <button disabled type="submit" id="kt_sign_in_submit" class="btn btn-sm btn-primary w-55 mb-5">View Attachment
+      </button>
+    </div>
+
+    <div class="row col-md-4 mb-5">
+      <label class="form-label fs-6 fw-bolder text-dark">Idea Date</label>
+      <p> {{idea.last_update | date:"dd-MMM-yyyy"}}</p>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label fs-6 fw-bolder text-dark">Presented By</label>
+      <p>{{idea.fullname}}</p>
+    </div>
+
+    <div class="fv-row mb-10">
+      <div class="d-flex justify-content-between mt-n5">
+        <div class="d-flex flex-stack mb-2">
+          <label class="form-label fw-bolder text-dark fs-6 mb-0">Description</label>
+        </div>
+      </div>
+      <p>{{idea.description}}</p>
+    </div>
+    
+    <div class="row col-md-4">
+      <label class="form-label fs-6 fw-bolder text-dark">Reviewer</label>
+      <p class="present_to">{{idea.present_to}}</p>
+    </div>
+    
+    <div class="col-md-4">
+      <label class="form-label fs-6 fw-bolder text-dark">Review Status</label>
+      <div class="{{idea.idea_status}}">{{idea.idea_status}}</div>
+    </div>
+    
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" (click)="modalRef.close()">
+      Close
+    </button>
+    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+  </div>
+</div>

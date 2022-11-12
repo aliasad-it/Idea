@@ -26,6 +26,12 @@ import { WorkFlowFormComponent } from './pages/workflow-form/workflow-form.compo
 import { ReviewFormComponent } from './pages/review-form/review-form.component';
 import { CriteriaListComponent } from './pages/criteria-list/criteria-list.component';
 import { CriteriaFormComponent } from './pages/criteria-form/criteria-form.component';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { ApprovalComponent } from './pages/approval/approval.component';
+import { UsersListComponent } from './pages/users-list/users-list.component';
+import { UsersRoleComponent } from './pages/users-role/users-role.component';
+import { RolesListComponent } from './pages/roles-list/roles-list.component';
+import { RolesUpdateComponent } from './pages/roles-update/roles-update.component'
 // import { IdeaFormModule } from './pages/idea-form/idea-form.module';
 // import { IdeaListModule } from './pages/idea-list/idea-list.module';
 // #fake-end#
@@ -52,7 +58,12 @@ function appInitializer(authService: AuthService) {
     WorkFlowFormComponent,
     ReviewFormComponent,
     CriteriaListComponent,
-    CriteriaFormComponent
+    CriteriaFormComponent,
+    ApprovalComponent,
+    UsersListComponent,
+    UsersRoleComponent,
+    RolesListComponent,
+    RolesUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +73,7 @@ function appInitializer(authService: AuthService) {
     ClipboardModule,
     FormsModule,
     ReactiveFormsModule,
+    MdbModalModule,
     // IdeaFormModule,
     // IdeaListModule,
     // #fake-start#

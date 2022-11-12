@@ -57,11 +57,9 @@ export class ReviewFormComponent implements OnInit {
    
     // this.mode = this.route.snapshot.paramMap.get('mode');
     // if(this.mode == 'edit'){
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         this.idea_id= this.route.snapshot.paramMap.get('idea_id');
 
         this.ideasService.SelectIdea(this.idea_id).subscribe(idea => {
-            console.log(idea);
             this.subject=idea.data[0].subject;
             this.description=idea.data[0].description;
             this.attachment=idea.data[0].attachment;
@@ -89,10 +87,8 @@ export class ReviewFormComponent implements OnInit {
      
 
     this.adminService.getCriteria().subscribe((data: any) => {
-      console.log(data)
       this.criterialist=data.data
       this.adminService.getReviewList(this.idea_id,this.userdata.userid).subscribe((data: any) => {
-        console.log(data)
         this.reviewlist=data.data
         
         if(this.criterialist.length > 0 ){
@@ -102,6 +98,9 @@ export class ReviewFormComponent implements OnInit {
               let review = {
               criteria_id:criteria.criteria_id,
               criteria_name:criteria.criteria_name,
+              criteria_A:criteria.A,
+              criteria_B:criteria.B,
+              criteria_C:criteria.C,
               score: this.reviewlist[rIndex].score,
               comment: this.reviewlist[rIndex].comment,
               last_update: new Date(Date.now() ),
@@ -113,13 +112,15 @@ export class ReviewFormComponent implements OnInit {
                
             })
             this.cd.detectChanges();
-            console.log(this.reviews);
           } else {
             this.criterialist.forEach((criteria:any) => {
               
               let review = {
                 criteria_id:criteria.criteria_id,
                 criteria_name:criteria.criteria_name,
+                criteria_A:criteria.A,
+                criteria_B:criteria.B,
+                criteria_C:criteria.C,
                 score: '',
                 comment: '',
                 updateby: this.userdata.userid,
@@ -128,7 +129,6 @@ export class ReviewFormComponent implements OnInit {
               }	
                 this.reviews.push(review)
                 this.cd.detectChanges()
-                console.log(this.reviews)
             })
           }
         }
@@ -144,13 +144,10 @@ export class ReviewFormComponent implements OnInit {
   }
 
   submit(form: NgForm,mode:string) {
-    console.log("review is new", form.value);
     
-    console.log(this.reviews);
     this.hasError = false;
    var data = {reviewer:this.reviewer,idea_status:mode,reviews:this.reviews,idea_id:this.idea_id}
     this.adminService.SaveReview(data).subscribe(data => {
-      console.log(data);
       if (data.status){
         this.router.navigateByUrl('/dashboard')
        }else {
@@ -159,19 +156,15 @@ export class ReviewFormComponent implements OnInit {
       }
       this.reviews = data.data;
      
-      console.log(this.reviews);
     }); 
     
   }
 
   updateReview(form: NgForm) {
-    console.log("review is new", form.value);
     
-    console.log(form.value);
     this.hasError = false;
    
     this.adminService.updateReview(form.value).subscribe(data => {
-      console.log(data);
       if (data.status){
         this.router.navigateByUrl('/work-flow')
        }else {
@@ -180,7 +173,6 @@ export class ReviewFormComponent implements OnInit {
       }
       this.reviewForms = data.data;
      
-      console.log(this.reviewForms);
     }); 
   }
 
