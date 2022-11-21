@@ -30,16 +30,18 @@ export class IdeaService {
     return this.http.post(GLOBAL.serviceUrl + '/ideas/PresentTo' , userdata );
   }
 
-  getSaveIdea(newidea: any): Observable<any> {
+  getSaveIdea(newidea: any, image:any): Observable<any> {
 
     newidea.roles = [3]; // Manager
     newidea.last_update = new Date(Date.now() );
     newidea.idea_status = 'New';
     newidea.present_to = '1st Level Reviewer';
-    newidea.pic = './assets/media/avatars/300-1.jpg';
- 
-  
-  
+    newidea.pic = image;
+    const formData: FormData = new FormData();
+    formData.append('file',image,image.name);
+    newidea.file = formData;
+    console.log(newidea);
+    
     return this.http.post(GLOBAL.serviceUrl + '/ideas/saveIdea', newidea);
   }
   
