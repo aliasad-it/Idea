@@ -1,5 +1,5 @@
 <div class="card">
-  <form class="form w-100 ideaformCont" novalidate="novalidate" id="kt_idea_form" #categoryForm="ngForm">
+  <form class="form w-100 ideaformCont" novalidate="novalidate" id="kt_idea_form" #categoryForm="ngForm" enctype="multipart/form-data">
 
     <div class="row mb-2">
       <div class="col-md-9 col-sm-9 ul mt-2">
@@ -90,9 +90,10 @@
         <!-- </div> -->
 
         <input class="border border-primary form-control form-control-lg form-control-solid attachment" type="file"
-          name="attachment" autocomplete="off" [(ngModel)]="attachment" />
+          name="file" accept="image, jpg, jpeg, png" required (change)="selectImage($event)" />
 
       </div>
+
 
     </div>
     <!--end::Form group-->
