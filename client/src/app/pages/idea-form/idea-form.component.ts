@@ -56,27 +56,37 @@ export class IdeaFormComponent implements OnInit {
     return this.ideaForm.controls;
   }
 
-  selectImage(event:any) {
+  selectImage(event: any) {
     this.image = event.target.files[0];
     console.log(this.image);
-    
   }
 
   submit(form: NgForm) {
     form.value['updateby'] = Number(this.userdata.userid);
     this.hasError = false;
-    this.ideasService.getSaveIdea(form.value, this.image).subscribe(data => {
-      if (data.status) {
-        this.router.navigateByUrl('/dashboard')
-      } else {
-        this.hasError = true;
-        this.ErrorMassage = 'Failed to submit.';
-      }
-
-      this.ideaForms = data.data;
-      console.log(this.ideaForms);
-
-    });
+    if (this.image) {
+      this.ideasService.getSaveIdeaFile(form.value, this.image).subscribe(data => {
+        if (data.status) {
+          this.router.navigateByUrl('/dashboard')
+        } else {
+          this.hasError = true;
+          this.ErrorMassage = 'Failed to submit.';
+        }
+        this.ideaForms = data.data;
+        console.log(this.ideaForms);
+      });
+    }else{
+      this.ideasService.getSaveIdea(form.value).subscribe(data => {
+        if (data.status) {
+          this.router.navigateByUrl('/dashboard')
+        } else {
+          this.hasError = true;
+          this.ErrorMassage = 'Failed to submit.';
+        }
+        this.ideaForms = data.data;
+        console.log(this.ideaForms);
+      });
+    }
 
   }
 

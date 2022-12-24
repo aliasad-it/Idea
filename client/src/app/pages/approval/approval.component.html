@@ -1,19 +1,19 @@
 <!-- begin::Header -->
 <div class="card-header border-0 pt-5">
-    <div class="row mb-1">
-        <h3 class="card-title align-items-start flex-column col-sm-10 col-md-10">
-            <span class="card-label ul fw-bolder fs-3">Approvals</span>
-            <span class="text-muted mt-1 fw-bold fs-7"></span>
-        </h3>
-        <div class="col-sm-2 col-md-2">
-        </div>
+  <div class="row mb-1">
+    <h3 class="card-title align-items-start flex-column col-sm-10 col-md-10">
+      <span class="card-label ul fw-bolder fs-3">Approvals</span>
+      <span class="text-muted mt-1 fw-bold fs-7"></span>
+    </h3>
+    <div class="col-sm-2 col-md-2">
     </div>
+  </div>
 
 
-    <!-- end::Header -->
-    <!-- begin::Body -->
-    <div class="card-body py-3">
-        <!-- begin::Table container 
+  <!-- end::Header -->
+  <!-- begin::Body -->
+  <div class="card-body py-3">
+    <!-- begin::Table container 
       <ng-container *ngIf="hasError">
         <div class="mb-lg-15 alert alert-danger">
           <div class="alert-text font-weight-bold">
@@ -22,28 +22,28 @@
         </div>
       </ng-container> -->
 
-        <div class="table-responsive">
-            <!-- begin::Table -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
 
-            <table class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-3">
-                <!-- begin::Table head -->
-                <thead>
-                    <tr class="fw-bolder text-muted">
-                        <th>SN</th>
-                        <th class="min-w-150px">Idea Subject</th>
-                        <th class="min-w-140px">Description</th>
-                        <th class="min-w-120px">Function Area</th>
-                        <th class="min-w-120px">Date</th>
-                        <th class="min-w-120px">Presented By</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <!-- end::Table head -->
-                <!-- begin::Table body -->
-                <tbody *ngIf="PresentTo.length > 0">
+      <table class="table table-row-bordered table-striped table-row-gray-100 align-middle gs-0 gy-3">
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th>SN</th>
+            <th class="min-w-150px">Idea Subject</th>
+            <th class="min-w-140px">Description</th>
+            <th class="min-w-120px">Function Area</th>
+            <th class="min-w-120px">Date</th>
+            <!-- <th class="min-w-120px">Presented By</th> -->
+            <th>Status</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody *ngIf="PresentTo.length > 0">
 
-                    <ng-container *ngFor='let idea of PresentTo; let idx = index'>
-                        <ng-container *ngIf="
+          <ng-container *ngFor='let idea of PresentTo; let idx = index'>
+            <ng-container *ngIf="
                 ((
                   (
                     (idea.idea_status ==='Approved' && idea.present_to =='1st Level Reviewer') || idea.present_to == '2nd Level Reviewer'
@@ -54,27 +54,26 @@
                     (idea.idea_status ==='Approved' && idea.present_to =='2nd Level Reviewer') || idea.present_to == '3rd Level Reviewer'
                   ) && idea.level3_user == userdata.userid
                 ) || (idea.present_to =='2nd Level Reviewer' && idea.level2_user == userdata.userid))  ">
-                            <tr>
-                                <td> {{idx + 1}} </td>
-                                <td><a routerLink="/review-form/{{idea.idea_id}}">{{idea.subject}}</a></td>
-                                <td>{{idea.description}}</td>
-                                <td>{{idea.f_area_desc}}</td>
-                                <td>{{idea.last_update | date}}</td>
-                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.fullname}}</td>
-                                <td>
-                                    <span class="badge badge-light-success"
-                                        [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
-                                </td>
-                            </tr>
-                        </ng-container>
-                    </ng-container>
+              <tr>
+                <td> {{idx + 1}} </td>
+                <td><a routerLink="/review-form/{{idea.idea_id}}">{{idea.subject}}</a></td>
+                <td>{{idea.description}}</td>
+                <td>{{idea.f_area_desc}}</td>
+                <td>{{idea.last_update | date}}</td>
+                <!-- <td class="text-dark fw-bolder text-hover-primary fs-6">{{idea.fullname}}</td> -->
+                <td>
+                  <span class="badge badge-light-success" [ngClass]="idea.idea_status">{{idea.idea_status}}</span>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
 
-                </tbody>
-                <!-- end::Table body -->
-            </table>
-            <!-- end::Table -->
-        </div>
-        <!-- end::Table container -->
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
     </div>
-    <!-- begin::Body -->
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
 </div>

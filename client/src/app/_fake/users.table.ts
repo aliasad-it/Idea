@@ -1,10 +1,11 @@
 export class UsersTable {
+  
   public static users: any = [
     {
       id: 1,
       username: 'admin',
       password: '123',
-      email: 'admin@demo.com',
+      email: '',
       authToken: 'auth-token-8f3ae836da744329a6f93bf20594b5cc',
       refreshToken: 'auth-token-f8c137a2c98743f48b643e71161d90aa',
       roles: [1], // Administrator
@@ -58,8 +59,8 @@ export class UsersTable {
     {
       id: 2,
       username: 'user',
-      password: '123',
-      email: 'ali.asad@nbcpepsi.com',
+      // password: '123',
+      // email: 'ali.asad@nbcpepsi.com',
       authToken: 'auth-token-6829bba69dd3421d8762-991e9e806dbf',
       refreshToken: 'auth-token-f8e4c61a318e4d618b6c199ef96b9e55',
       roles: [2], // Manager
@@ -112,8 +113,8 @@ export class UsersTable {
     {
       id: 3,
       username: 'guest',
-      password: '123',
-      email: 'ali.asad@nbcpepsi.com',
+      // password: '123',
+      // email: 'ali.asad@nbcpepsi.com',
       authToken: 'auth-token-d2dff7b82f784de584b60964abbe45b9',
       refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c1a5',
       roles: [3], // Guest

@@ -30,17 +30,38 @@ export class IdeaService {
     return this.http.post(GLOBAL.serviceUrl + '/ideas/PresentTo' , userdata );
   }
 
-  getSaveIdea(newidea: any, image:any): Observable<any> {
+  getSaveIdeaFile(newidea: any, image:any): Observable<any> {
 
     newidea.roles = [3]; // Manager
-    newidea.last_update = new Date(Date.now() );
+    newidea.last_update = new Date();
     newidea.idea_status = 'New';
     newidea.present_to = '1st Level Reviewer';
-    newidea.pic = image;
-    const formData: FormData = new FormData();
-    formData.append('file',image,image.name);
-    newidea.file = formData;
-    console.log(newidea);
+    //newidea.pic = image;
+    let formData: FormData = new FormData();
+    formData.append('file',image);
+    formData.append('roles',newidea.roles);
+    formData.append('last_update',newidea.last_update);
+    formData.append('idea_status',newidea.idea_status);
+    formData.append('present_to',newidea.present_to);
+    formData.append('subject',newidea.subject);
+    formData.append('description',newidea.description);
+    formData.append('cat_id',newidea.cat_id);
+    formData.append('updateby',newidea.updateby);
+    formData.append('f_area_id',newidea.f_area_id);
+    console.log('file upload',image.name ,formData);
+    //newidea.file = formData;
+    console.log(formData);
+    
+    return this.http.post(GLOBAL.serviceUrl + '/ideas/saveIdeaFile', formData);
+  }
+
+  getSaveIdea(newidea: any): Observable<any> {
+
+    newidea.roles = [3]; // Manager
+    newidea.last_update = new Date();
+    newidea.idea_status = 'New';
+    newidea.present_to = '1st Level Reviewer';
+    
     
     return this.http.post(GLOBAL.serviceUrl + '/ideas/saveIdea', newidea);
   }
